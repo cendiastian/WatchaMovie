@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import Img from "../../assets/unsplash_wMkaMXTJjlQ.png";
+// import Img from "../../assets/unsplash_wMkaMXTJjlQ.png";
 import { makeStyles } from '@mui/styles';
 // import styles from "./styles.module.css"
 const useStyles = makeStyles({
