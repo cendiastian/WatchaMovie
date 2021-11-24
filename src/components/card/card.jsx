@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         maxWidth: 223,
     }});
 
-export default function ActionAreaCard() {
+export default function ActionAreaCard(props) {
     const styles = useStyles();
   return (
     <Card className={styles.item}>
@@ -24,12 +24,12 @@ export default function ActionAreaCard() {
           component="img"
           width="223px"
           height="225px"
-          image={Img}
+          image={props.image}
           alt="poster"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" color="white">
-            Movie Title
+            {props.title}
           </Typography>
           {/* <Typography variant="body2" color="white">
             Lizards are a widespread group of squamate reptiles, with over 6,000

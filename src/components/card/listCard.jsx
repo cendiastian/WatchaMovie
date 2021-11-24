@@ -8,6 +8,7 @@ import Card from "./card";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
+import {Data} from "./data.jsx";
 
 const useStyles = makeStyles({
     container: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
     width: 1200,
     backgroundColor: "#212121",
     borderRadius:15,
-    paddingBottom: 15,
+    padding: (20,20,20,20)
   },
 });
 
@@ -38,7 +39,12 @@ export default function BasicGrid() {
       </Typography>
       <Box>
         <Grid container spacing={1} justifyContent={"space-between"}>
-          <Grid item md={2.3}>
+        {Data.map((data, idx) => (
+          <Grid item md={2.3} key={idx}>
+            <Card title={ data.title } image={data.image}/>
+          </Grid>
+        ))}
+          {/* <Grid item md={2.3}>
             <Card />
           </Grid>
           <Grid item md={2.3}>
@@ -49,10 +55,7 @@ export default function BasicGrid() {
           </Grid>
           <Grid item md={2.3}>
             <Card />
-          </Grid>
-          <Grid item md={2.3}>
-            <Card />
-          </Grid>
+          </Grid> */}
         </Grid>
         
       </Box>

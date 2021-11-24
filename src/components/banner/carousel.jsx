@@ -6,10 +6,7 @@ import "swiper/swiper.min.css";
 // Import Swiper styles
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
-import Img from "../../assets/unsplash_CiUR8zISX60.png";
-import logo from "../../logo.svg";
-import styles from "./styles.module.css";
-import Box from '@mui/material/Box';
+import {Data} from "./data.jsx";
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from "swiper";
@@ -30,15 +27,11 @@ export default function App() {
         navigation={true}
         className="mySwiper"
       >
-        <SwiperSlide>
-        <img src={Img}  alt="banner" />
+      {Data.map((data, idx) => (
+        <SwiperSlide key={idx}>
+        <img src={data.image}  alt="banner" />
         </SwiperSlide>
-        <SwiperSlide>
-        <img src={Img}  alt="banner" />
-        </SwiperSlide>
-        <SwiperSlide>
-        <img src={Img}  alt="banner" />
-        </SwiperSlide>
+      ))}
       </Swiper>
     // </Box>
   );
