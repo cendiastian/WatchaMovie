@@ -1,8 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Typography, Container, Grid } from "@mui/material";
-import Line from "../../assets/Line 13.png";
+import { Typography, Container } from "@mui/material";
+// import Line from "../../assets/Line 13.png";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -16,14 +16,14 @@ const useStyles = makeStyles({
     borderRadius: 15,
     padding: (20, 20, 20, 20),
   },
-  white: {
-    color: "#fffff",
-  },
+  //   white: {
+  //     color: "#fffff",
+  //   },
 });
 export default function BasicTextFields() {
   const styles = useStyles();
   return (
-    <Container className={styles.container}>
+    <Container className={styles.container} sx={{marginTop:5}}>
       <Box sx={{ borderBottom: " 1px solid #ABABB1" }}>
         <Typography gutterBottom variant="h4" component="div" color="white">
           Create
@@ -38,7 +38,7 @@ export default function BasicTextFields() {
           display: "flex",
           justifyContent: "flex-end",
           flexDirection: "column",
-        //   textAlign:'right',
+          //   textAlign:'right',
         }}
         noValidate
         autoComplete="off"
@@ -48,13 +48,15 @@ export default function BasicTextFields() {
           sx={{ display: "flex", alignItems: "center", gap: 10, padding: 2 }}
         >
           {/* <Grid item xs={3}> */}
-          <Typography gutterBottom variant="h6" component="p" color="white">
-            Imdb Id
-          </Typography>
+          <Box sx={{ width: "20%" }}>
+            <Typography gutterBottom variant="h6" component="p" color="white">
+              Imdb Id
+            </Typography>
+          </Box>
           {/* </Grid> */}
           {/* <Grid item xs={7}> */}
           <TextField
-            sx={{width:"50%",}}
+            sx={{ width: "50%" }}
             id="outlined-basic"
             label="Outlined"
             variant="outlined"
@@ -66,13 +68,15 @@ export default function BasicTextFields() {
           sx={{ display: "flex", alignItems: "center", gap: 10, padding: 2 }}
         >
           {/* <Grid item xs={3}> */}
-          <Typography gutterBottom variant="h6" component="p" color="white">
-            Title
-          </Typography>
+          <Box sx={{ width: "20%" }}>
+            <Typography gutterBottom variant="h6" component="p" color="white">
+              Title
+            </Typography>
+          </Box>
           {/* </Grid> */}
           {/* <Grid item xs={7}> */}
           <TextField
-            sx={{width:"50%",}}
+            sx={{ width: "50%" }}
             id="outlined-basic"
             label="Outlined"
             variant="outlined"
@@ -84,13 +88,15 @@ export default function BasicTextFields() {
           sx={{ display: "flex", alignItems: "center", gap: 10, padding: 2 }}
         >
           {/* <Grid item xs={3}> */}
-          <Typography gutterBottom variant="h6" component="p" color="white">
-            Title
-          </Typography>
+          <Box sx={{ width: "20%" }}>
+            <Typography gutterBottom variant="h6" component="p" color="white">
+              Title
+            </Typography>
+          </Box>
           {/* </Grid> */}
           {/* <Grid item xs={7}> */}
           <TextField
-            sx={{width:"50%",}}
+            sx={{ width: "50%" }}
             id="outlined-basic"
             label="Outlined"
             variant="outlined"
