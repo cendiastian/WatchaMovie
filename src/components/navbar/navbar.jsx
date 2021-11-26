@@ -10,13 +10,13 @@ import Grid from "@mui/material/Grid";
 export default function PrimarySearchAppBar() {
   const [isLogin, setIsLogin] = useState(true);
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, mb:5,}}>
       <AppBar
         position="static"
         sx={{ flexGrow: 1, backgroundColor: "#25274D" }}
       >
         <Toolbar>
-          <Grid container spacing={1} columns={12} sx={{ alignItems:"center", }}>
+          <Grid container spacing={1} columns={12} sx={{ alignItems:"center"}}>
             <Grid item xs={2}>
               <Typography
                 variant="h4"

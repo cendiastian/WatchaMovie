@@ -2,6 +2,7 @@ import React from "react";
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 // import Box from '@mui/material/Box';
 import { Data } from './data'
@@ -30,9 +31,10 @@ function Footer() {
         
         sx={{
             backgroundColor:"#212121",
-            paddingTop:15,
+            paddingTop:10,
             paddingBottom:5,
             color:"white",
+            mt:5,
         //   borderTop: (theme) => `1px solid ${theme.palette.divider}`,
         //   mt: 8,
         //   py: [3, 6],
@@ -57,12 +59,12 @@ function Footer() {
               </Typography>
               {/* <ul> */}
                 {data.items.map(({ Icon, item }, i) => (
-                  <div key={i}>
+                  <Box key={i}>
                     <Link href="#" variant="subtitle1" color="#fffff" sx={{textDecoration:"none", color:"white"}}>
                       {/* {item} */}
                       {Icon && <Icon />} {item}
                     </Link>
-                  </div>
+                  </Box>
                 ))}
               {/* </ul> */}
             </Grid>
