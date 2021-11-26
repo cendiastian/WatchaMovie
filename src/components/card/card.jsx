@@ -13,6 +13,7 @@ const useStyles = makeStyles({
         backgroundColor: "#181818",
         borderRadius: 5,
         maxWidth: 223,
+        // marginTop:10,
     }});
 
 export default function ActionAreaCard(props) {
@@ -26,6 +27,7 @@ export default function ActionAreaCard(props) {
           height="225px"
           image={props.image}
           alt="poster"
+          loading="lazy"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" color="white">
