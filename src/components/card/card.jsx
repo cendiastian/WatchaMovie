@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import Img from "../../assets/unsplash_wMkaMXTJjlQ.png";
+// import Img from "../../assets/unsplash_wMkaMXTJjlQ.png";
 import { makeStyles } from '@mui/styles';
 // import styles from "./styles.module.css"
 const useStyles = makeStyles({
@@ -13,9 +13,10 @@ const useStyles = makeStyles({
         backgroundColor: "#181818",
         borderRadius: 5,
         maxWidth: 223,
+        // marginTop:10,
     }});
 
-export default function ActionAreaCard() {
+export default function ActionAreaCard(props) {
     const styles = useStyles();
   return (
     <Card className={styles.item}>
@@ -24,12 +25,13 @@ export default function ActionAreaCard() {
           component="img"
           width="223px"
           height="225px"
-          image={Img}
+          image={props.image}
           alt="poster"
+          loading="lazy"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" color="white">
-            Movie Title
+            {props.title}
           </Typography>
           {/* <Typography variant="body2" color="white">
             Lizards are a widespread group of squamate reptiles, with over 6,000
