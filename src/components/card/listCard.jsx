@@ -8,43 +8,64 @@ import Card from "./card";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-import {Data} from "./data.jsx";
+import { Data } from "./data.jsx";
+// import Line from "../../assets/Line 13.png";
 
 const useStyles = makeStyles({
-    container: {
+  container: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: 1200,
+    width: "fit-content",
     backgroundColor: "#212121",
-    borderRadius:15,
-    padding: (20,20,20,20)
+    borderRadius: 15,
+    paddingTop:20,
+    paddingBottom:20,
+  },
+});
+const usedStyles = makeStyles({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    width: "65%",
+    backgroundColor: "#212121",
+    borderRadius: 15,
+    paddingTop:20,
+    paddingBottom:20,
   },
 });
 
-export default function BasicGrid() {
-  const styles = useStyles();
+export default function BasicGrid(props) {
+  let styles = useStyles();
+  if (props.length === 8){
+    styles = usedStyles();
+  }
   return (
-    <Container
-      className={styles.container}
-    >
-      <Typography
-        gutterBottom
-        variant="h4"
-        component="div"
-        color="white"
-        textAlign="left"
+    <Container className={styles.container}>
+      <Box sx={{ borderBottom: " 1px solid #ABABB1", mb:5,}}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="div"
+          color="white"
+          textAlign="left"
+        >
+          Movie
+        </Typography>
+      </Box>
+      <Grid
+        container
+        spacing={2}
+        columns={props.length}
+        justifyContent={"space-between"}
       >
-        Movie Title
-      </Typography>
-      <Box>
-        <Grid container spacing={1} justifyContent={"space-between"}>
         {Data.map((data, idx) => (
-          <Grid item md={2.3} key={idx}>
-            <Card title={ data.title } image={data.image}/>
+          <Grid item xs={2} key={idx}>
+            <Card title={data.title} image={data.image} />
           </Grid>
         ))}
-          {/* <Grid item md={2.3}>
+        {/* <Grid item md={2.3}>
             <Card />
           </Grid>
           <Grid item md={2.3}>
@@ -56,9 +77,9 @@ export default function BasicGrid() {
           <Grid item md={2.3}>
             <Card />
           </Grid> */}
-        </Grid>
-        
-      </Box>
+      </Grid>
+
+      {/* </Box> */}
     </Container>
   );
 }
