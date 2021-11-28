@@ -12,7 +12,7 @@ export default function Home() {
       <Nav />
       <Register />
       <Box  sx={{display:'flex', justifyContent:'center', mt:2,}}>
-      <Link href="#" color="#ABABB1" sx={{ textDecoration: "none" }}>
+      <Link href="/login" color="#ABABB1" sx={{ textDecoration: "none" }}>
         Already have account?
       </Link>
       </Box>

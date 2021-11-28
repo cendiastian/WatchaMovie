@@ -1,17 +1,21 @@
-import * as React from "react";
-// import Avatar from '@mui/material/Avatar';
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
-// import CssBaseline from '@mui/material/CssBaseline';
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
+import { useDispatch, useSelector } from "react-redux";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { auth } from "../../config/firebase";
+import { useNavigate  } from "react-router-dom";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { login } from "../../store/userSlice";
+import FormControl from "@mui/material/FormControl";
 
 const useStyles = makeStyles({
   container: {
@@ -23,7 +27,7 @@ const useStyles = makeStyles({
     backgroundColor: "#212121",
     borderRadius: 15,
     padding: (20, 20, 20, 20),
-    mt:2,
+    mt: 2,
   },
   white: {
     color: "#fffff",
@@ -32,6 +36,36 @@ const useStyles = makeStyles({
 
 export default function Login() {
   const styles = useStyles();
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let navigate = useNavigate();
+  const isLogin = useSelector((state) => state.user.isLogin);
+  // const history = useNavigate();
+  const dispatch = useDispatch();
+
+  if (isLogin) {
+    console.log('masuk')
+    navigate('/');
+  }
+  const loginHandler = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userAuth) => {
+        dispatch(
+          login({
+            name: userAuth.user.displayName,
+            id: userAuth.user.uid,
+          })
+        );
+        setLoading(false);
+      })
+      .catch((err) => {
+        alert(err);
+        setLoading(false);
+      });
+  };
   return (
     <Container className={styles.container}>
       <Box>
@@ -54,13 +88,15 @@ export default function Login() {
           Login with email
         </Typography>
       </Box>
-      <Box component="form" noValidate sx={{ mt: 1 }}>
+      <FormControl onSubmit={loginHandler} noValidate sx={{ mt: 1 }}>
         <TextField
           margin="normal"
           fullWidth
           required
           id="email"
           label="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           name="email"
           autoComplete="email"
           autoFocus
@@ -73,6 +109,8 @@ export default function Login() {
           fullWidth
           name="password"
           label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           //   type="password"
           id="password"
           autoComplete="current-password"
@@ -96,15 +134,22 @@ export default function Login() {
             </Link>
           </Grid>
         </Grid>
+        {loading && 
+          <LoadingButton loading variant="outlined" color="primary">
+          Sign In
+          </LoadingButton>
+          }
+          {!loading && (
         <Button
-          type="submit"
+          onClick={loginHandler}
           variant="contained"
           color="primary"
           sx={{ mt: 3, mb: 2 }}
         >
           Sign In
         </Button>
-      </Box>
+        )}
+      </FormControl>
     </Container>
   );
 }
