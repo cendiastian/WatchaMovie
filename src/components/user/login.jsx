@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -12,10 +12,12 @@ import Link from "@mui/material/Link";
 import { useDispatch, useSelector } from "react-redux";
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { auth } from "../../config/firebase";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { login } from "../../store/userSlice";
 import FormControl from "@mui/material/FormControl";
+import { useGetUser } from "../../hooks/useGetUser";
+// import {useLocalStorage} from "react-use-storage";
 
 const useStyles = makeStyles({
   container: {
@@ -35,30 +37,65 @@ const useStyles = makeStyles({
 });
 
 export default function Login() {
+  // const isl= useLocalStorage("isLoggin", false);
   const styles = useStyles();
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({ name: "", id: "" });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const isLogin = useSelector((state) => state.user.isLogin);
-  // const history = useNavigate();
   const dispatch = useDispatch();
+  const { getUserById, userById } = useGetUser();
+  // const { id, name, role, premium, expired } = userById.moviedb_user;
+  // const data = userById
+  useEffect(() => {
+    if (user.id) {
+      getUserById({
+        variables: {
+          id: user.id,
+        },
+      });
+    } 
+  }, [getUserById, user.id]);
+
+  useEffect(() => {
+    if (userById?.moviedb_user) {
+      console.log(userById);
+      const user = userById.moviedb_user[0]
+      console.log(userById.moviedb_user);
+      dispatch(
+        login({
+          name: user.name,
+          id: user.id,
+          role: user.role,
+          premium: user.premium,
+          expired: user.expired,
+        })
+      );
+      // localStorage.setItem('isLogin', true);
+      // console.log(localStorage.getItem('islogin'));
+      // setLogin(true)
+      // console.log(isLogin);
+
+    }
+    setLoading(false);
+  }, [dispatch, userById]);
 
   if (isLogin) {
-    console.log('masuk')
-    navigate('/');
+    console.log("masuk");
+    console.log(isLogin);
+    navigate("/");
   }
   const loginHandler = (e) => {
     e.preventDefault();
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {
-        dispatch(
-          login({
-            name: userAuth.user.displayName,
-            id: userAuth.user.uid,
-          })
-        );
+        setUser({
+          name: userAuth.user.displayName,
+          id: userAuth.user.uid,
+        });
         setLoading(false);
       })
       .catch((err) => {
@@ -134,20 +171,20 @@ export default function Login() {
             </Link>
           </Grid>
         </Grid>
-        {loading && 
+        {loading && (
           <LoadingButton loading variant="outlined" color="primary">
-          Sign In
+            Sign In
           </LoadingButton>
-          }
-          {!loading && (
-        <Button
-          onClick={loginHandler}
-          variant="contained"
-          color="primary"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Sign In
-        </Button>
+        )}
+        {!loading && (
+          <Button
+            onClick={loginHandler}
+            variant="contained"
+            color="primary"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign In
+          </Button>
         )}
       </FormControl>
     </Container>

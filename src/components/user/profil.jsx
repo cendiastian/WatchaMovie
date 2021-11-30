@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 // import TextField from "@mui/material/TextField";
 import { Typography, Container, Button } from "@mui/material";
@@ -6,7 +6,7 @@ import { Typography, Container, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
@@ -40,25 +40,28 @@ const style = {
 };
 export default function BasicTextFields() {
   const styles = useStyles();
-
+// const [isLogin, setLogin] = useState(false)
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.user.isLogin);
-  let navigate = useNavigate();
+ let navigate = useNavigate()
+ 
 
-  if (!isLogin) {
-    console.log('masuk');
-    navigate("/login");
-  }
+//   if (!isLogin) {
+    // console.log('masuk');
+    // navigate("/login");
+//   }
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
-    console.log(isLogin);
+    // console.log(isLogin);
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
   const logoutHandler = () => {
     signOut(auth);
     dispatch(logout());
+    // localStorage.setItem('isLogin', false);
+    // setLogin(localStorage.getItem('false'))
     handleClose();
+    navigate("/login");
   };
 
   return (

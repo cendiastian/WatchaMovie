@@ -1,15 +1,15 @@
 import React from "react";
-import Nav from "../../components/navbar/navbar";
+// import Nav from "../../components/navbar/navbar";
 import Login from "../../components/user/login";
 // import Card from "./components/card/card.jsx";
-import Footer from "../../components/footer/footer.jsx";
+// import Footer from "../../components/footer/footer.jsx";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 
 export default function Home() {
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
 
       <Login />
       <Box  sx={{display:'flex', justifyContent:'center', mt:2,}}>
@@ -17,7 +17,7 @@ export default function Home() {
         Or create an account
       </Link>
       </Box>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

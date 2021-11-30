@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import Line from "../../assets/Line 14.png";
 import Box from "@mui/material/Box";
 // import styles from "./styles.module.css";
-export default function Video() {
+export default function Video(props) {
+    console.log(props.movie.Video);
   return (
     <Container
       sx={{
@@ -15,29 +16,31 @@ export default function Video() {
         justifyContent: "center",
         width: "65%",
         padding: (5, 5, 5, 5),
-        borderRadius:5,
+        borderRadius: 5,
       }}
     >
-      <Typography
-        gutterBottom
-        variant="h4"
-        component="div"
-        color="white"
-        textAlign="left"
-      >
-        Movie Title
-      </Typography>
-      <div item xs={1} sm={1}>
+      <Box sx={{ borderBottom: " 1px solid #ABABB1" }}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="div"
+          color="white"
+          textAlign="left"
+        >
+          Movie Title
+        </Typography>
+      </Box>
+      {/* <div item xs={1} sm={1}>
         <img src={Line} alt="line" />
-      </div>
+      </div> */}
       <Box
         sx={{
-        //   width: "fit-content",
+          //   width: "fit-content",
           display: "flex",
           justifyContent: "center",
-        //   left:
-        // paddingLeft: 10,
-        paddingTop: 5,
+          //   left:
+          // paddingLeft: 10,
+          paddingTop: 5,
         }}
       >
         {/* <ReactPlayer
@@ -46,15 +49,7 @@ export default function Video() {
           width='800px'
           height='450px'
         /> */}
-                <iframe
-          width="800"
-          height="450"
-          src="https://www.youtube.com/embed/Tqy_JTeNEY4"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        <iframe title="Movie" src={`${props.movie.Video}`} FRAMEBORDER='0' MARGINWIDTH='0' MARGINHEIGHT='0' SCROLLING='NO' WIDTH="800px" HEIGHT="450px" allowfullscreen="true"/>
       </Box>
     </Container>
   );

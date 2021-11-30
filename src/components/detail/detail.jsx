@@ -1,12 +1,12 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Line from "../../assets/Line 14.png";
-import Poster from "../../assets/unsplash_wMkaMXTJjlQ.png";
 import Grid from "@mui/material/Grid";
-// import Box from "@mui/material/Box";
-// import styles from "./styles.module.css";
-export default function Video(props) {
+import Box from "@mui/material/Box";
+
+export default function Video(data) {
+    const movie = data.movie
+    console.log(movie)
   return (
     <Container
       sx={{
@@ -20,41 +20,136 @@ export default function Video(props) {
         color: "white",
       }}
     >
-      <Typography
-        gutterBottom
-        variant="h4"
-        component="div"
-        // color="white"
-        textAlign="left"
-      >
-        Movie Title
-      </Typography>
-      <div item xs={1} sm={1}>
-        <img src={Line} alt="line" />
-      </div>
+      <Box sx={{ borderBottom: " 1px solid #ABABB1", mb: 3 }}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="div"
+          // color="white"
+          textAlign="left"
+        >
+          Movie Title
+        </Typography>
+      </Box>
       <Grid container spacing={1} justifyContent={"flex-start"} sx={{ gap: 2 }}>
         <Grid item md={3}>
-          <img src={Poster} alt="line" loading="lazy" />
+          <img
+            src={movie.Poster}
+            alt={movie.Title}
+            loading="lazy"
+            width="218"
+            height="233"
+          />
         </Grid>
-        <Grid item md={6} sx={{ textAlign: "left" }}>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            Title: {props.title}
-          </Typography>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            Released: {props.title}
-          </Typography>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            Rating: {props.title}
-          </Typography>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            Writer: {props.title}
-          </Typography>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            Genre: {props.title}
-          </Typography>
-          <Typography gutterBottom variant="subtitle1" component="div">
-            Plot: {props.title}
-          </Typography>
+        <Grid item md={6} sx={{ textAlign: "left", width: "100%" }}>
+          <Box sx={{ width: "100%", display: "flex" }}>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "20%" }}
+            >
+              Title
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "70%" }}
+            >
+              : {movie.Title}
+            </Typography>
+          </Box>
+          <Box sx={{ width: "100%", display: "flex" }}>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "20%" }}
+            >
+              Released
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "70%" }}
+            >
+              : {movie.Released}
+            </Typography>
+          </Box>
+          <Box sx={{ width: "100%", display: "flex" }}>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "20%" }}
+            >
+              Genre
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "70%" }}
+            >
+               : {movie.genreByGenre.name}
+            </Typography>
+          </Box>
+          <Box sx={{ width: "100%", display: "flex" }}>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "20%" }}
+            >
+              Runtime
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "70%" }}
+            >
+              : {movie.Runtime}
+            </Typography>
+          </Box>
+          <Box sx={{ width: "100%", display: "flex" }}>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "20%" }}
+            >
+              Writer
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "70%" }}
+            >
+              : {movie.Writer}
+            </Typography>
+          </Box>
+          <Box sx={{ width: "100%", display: "flex" }}>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "20%" }}
+            >
+              Plot
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="p"
+              sx={{ width: "70%" }}
+            >
+              : {movie.Plot}
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
     </Container>

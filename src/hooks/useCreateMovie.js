@@ -1,13 +1,10 @@
-import { CreateMovie } from "../Graphql/mutation";
+import { createMovie } from "../graphql/mutation";
 import { useMutation } from "@apollo/client";
-import { GetMovies } from "../Graphql/query";
+import { GetAllMovie } from "../graphql/query";
 
-function useCreateMovie() {
-  const [CreateMovies, { loading: loadingCreate }] = useMutation(
-    CreateMovie,
-    { refetchQueries: [GetMovies] }
-  );
-  return { CreateMovies, loadingCreate };
+export function useCreateMovie() {
+  const [CreateMovie, { loading: loadingCreate }] = useMutation(createMovie, {
+    refetchQueries: [GetAllMovie],
+  });
+  return { CreateMovie, loadingCreate };
 }
-
-export default useCreateMovie;

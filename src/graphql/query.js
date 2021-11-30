@@ -18,6 +18,7 @@ import { gql } from "@apollo/client";
 export const GetAllMovie = gql`
   query GetAllMovie {
     moviedb_movie {
+      Poster
       Plot
       Released
       Runtime
@@ -28,6 +29,7 @@ export const GetAllMovie = gql`
       genreByGenre {
         name
       }
+      Genre
       created_at
       updated_at
     }
@@ -44,26 +46,29 @@ export const GetAllGenre = gql`
 `;
 
 export const GetMovieById = gql`
-  query GetMovieById($id: Int!) {
-    moviedb_movie(where: { id: $id }) {
+  query GetMovieById($id: Int = "") {
+    moviedb_movie_by_pk(id: $id) {
+      Genre
       Plot
+      Poster
       Released
       Runtime
       Title
+      Video
       Writer
-      imdbID
+      created_at
       id
+      imdbID
+      updated_at
       genreByGenre {
         name
       }
-      created_at
-      updated_at
     }
   }
 `;
 
 export const GetGenreById = gql`
-  query GetGenreById($id: Int!) {
+  query GetGenreById($id: Int_comparison_exp!) {
     moviedb_genre(where: { id: $id }) {
       id
       name
@@ -72,7 +77,7 @@ export const GetGenreById = gql`
 `;
 
 export const GetUserById = gql`
-query GetUser($id: String!) {
+  query GetUser($id: String!) {
     moviedb_user(where: { id: { _eq: $id } }) {
       email
       expired
@@ -85,4 +90,4 @@ query GetUser($id: String!) {
       updated_at
     }
   }
-  `;
+`;
