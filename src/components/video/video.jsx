@@ -6,7 +6,7 @@ import Line from "../../assets/Line 14.png";
 import Box from "@mui/material/Box";
 // import styles from "./styles.module.css";
 export default function Video(props) {
-    console.log(props.movie.Video);
+  console.log(props.video);
   return (
     <Container
       sx={{
@@ -49,7 +49,17 @@ export default function Video(props) {
           width='800px'
           height='450px'
         /> */}
-        <iframe title="Movie" src={`${props.movie.Video}`} FRAMEBORDER='0' MARGINWIDTH='0' MARGINHEIGHT='0' SCROLLING='NO' WIDTH="800px" HEIGHT="450px" allowfullscreen="true"/>
+        <iframe
+          title="Movie"
+          src={`${props.video}`}
+          frameBorder="0"
+          marginWidth="0"
+          marginHeight="0"
+          scrolling="NO"
+          width="800px"
+          height="450px"
+          allowFullScreen="true"
+        />
       </Box>
     </Container>
   );

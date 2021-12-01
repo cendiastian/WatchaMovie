@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { useParams } from "react-router-dom";
+import useGetMovie from "../../hooks/useGetMovie";
 
-export default function Video(data) {
-    const movie = data.movie
-    console.log(movie)
+export default function Video(props) {
+    const movie = props.movie
   return (
     <Container
       sx={{
@@ -93,7 +94,7 @@ export default function Video(data) {
               component="p"
               sx={{ width: "70%" }}
             >
-               : {movie.genreByGenre.name}
+               : {movie.Genre}
             </Typography>
           </Box>
           <Box sx={{ width: "100%", display: "flex" }}>
