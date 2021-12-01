@@ -1,60 +1,4 @@
-// import ListItem from "./ListItem";
-// const ListPassenger = (props) => {
-//   if (props.data.length === 0) {
-//     return <p>Not Found</p>;
-//   }
-//   return (
-//     <div>
-//       <table cellPadding="5px" cellSpacing="0" style={{ margin: "auto" }}>
-//         <thead bgcolor="red">
-
-//         </thead>
-//         <tbody>
-//           {props.data.map((item) => (
-//             <ListItem
-//               key={item.id}
-//               data={item}
-//               onEdit={props.onEdit}
-//               hapusPengunjung={props.onDelete}
-//             />
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default ListPassenger;
-
-// import "./Home.css";
-// const ListItem = (props) => {
-//   const { id, nama, umur, jenis_kelamin } = props.data;
-//   const editHandler = () => {
-//     props.onEdit({
-//       nama,
-//       umur,
-//       jenis_kelamin,
-//       id,
-//     });
-//   };
-//   return (
-//     <tr>
-//       <td>{nama}</td>
-//       <td>{umur}</td>
-//       <td>{jenis_kelamin}</td>
-//       <td className="removeBorder" onClick={() => props.hapusPengunjung(id)}>
-//         <button>Hapus</button>
-//       </td>
-//       <td className="removeBorder" onClick={editHandler}>
-//         <button>Edit</button>
-//       </td>
-//     </tr>
-//   );
-// };
-
-// export default ListItem
-
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -64,40 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import Movie from "./movie";
 import { Button, Container, Typography } from "@mui/material";
-// import Line from "../../assets/Line 13.png";
 import { makeStyles } from "@mui/styles";
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-const rows = [
-  {
-    index: 1,
-    title: "Arcu dui blandit.",
-    // image:  Img ,
-  },
-  {
-    index: 2,
-    title: "Arcu dui blandit.",
-    // image:  Img ,
-  },
-  {
-    index: 3,
-    title: "Arcu dui blandit.",
-    // image:  Img ,
-  },
-  {
-    index: 4,
-    title: "Arcu dui blandit.",
-    // image:  Img ,
-  },
-  {
-    index: 5,
-    title: "Arcu dui blandit.",
-    // image:  Img ,
-  },
-];
+// import { useGetAllMovie } from "../../hooks/useGetAllMovie";
 
 const useStyles = makeStyles({
   container: {
@@ -111,7 +23,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicTable() {
+export default function BasicTable(props) {
+  const movie = props.movie
   const styles = useStyles();
   return (
     <Container className={styles.container}>
@@ -135,25 +48,19 @@ export default function BasicTable() {
             <TableRow>
               {/* <TableCell>Dessert (100g serving)</TableCell> */} 
               <TableCell align="center">Title</TableCell>
-              <TableCell align="center">Duration</TableCell>
-              <TableCell align="center">Size</TableCell>
+              <TableCell align="center">Runtime</TableCell>
+              <TableCell align="center">imdbID</TableCell>
               <TableCell align="center" colSpan={2}>
                 Action
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <Movie title={row.title} duration={row.title} size={row.title} />
+            {movie.map((movie) => (
+              <Movie setId={props.setId}updateMode={props.setUpdate} setMovie={props.setMovie} movie={movie} />
             ))}
-            {/* <TableRow
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            > */}
-            {/* </TableRow> */}
           </TableBody>
-              <Button variant="contained" color='primary'>New Movie</Button>
         </Table>
-      {/* </TableContainer> */}
     </Container>
   );
 }

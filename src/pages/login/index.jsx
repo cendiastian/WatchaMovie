@@ -13,7 +13,7 @@ export default function Home() {
 
       <Login />
       <Box  sx={{display:'flex', justifyContent:'center', mt:2,}}>
-      <Link href="#" color="#ABABB1" sx={{ textDecoration: "none" }}>
+      <Link href="/register" color="#ABABB1" sx={{ textDecoration: "none" }}>
         Or create an account
       </Link>
       </Box>
