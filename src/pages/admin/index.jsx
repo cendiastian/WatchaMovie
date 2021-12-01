@@ -28,7 +28,7 @@ export default function Admin() {
 
   const { updateMovie, loadingUpdate } = useUpdateMovie();
 
-  const CreateMovieHandler = (movie) => {
+  const CreateMovieHandler = () => {
     console.log("Create Movie");
     CreateMovie({
       variables: {
