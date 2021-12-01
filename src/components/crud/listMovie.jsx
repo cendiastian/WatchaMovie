@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import Movie from "./movie";
-import { Button, Container, Typography } from "@mui/material";
+import {  Container, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 // import { useGetAllMovie } from "../../hooks/useGetAllMovie";
 

@@ -11,8 +11,8 @@ export default function OrderPage( ) {
   const [movie, setMovie] = useState([]);
   console.log( id )
 
-    const { MovieByOrderAsc, errorMovieByOrderAsc, loadingMovieByOrderAsc } = useGetMovieByOrderAsc(id);
-    const { MovieByOrderDesc, errorMovieByOrderDesc, loadingMovieByOrderDesc } = useGetMovieByOrderDesc(id);
+    const { MovieByOrderAsc  } = useGetMovieByOrderAsc(id);
+    const { MovieByOrderDesc  } = useGetMovieByOrderDesc(id);
   
   useEffect(() => {
     if (MovieByOrderAsc && id === "asc") {

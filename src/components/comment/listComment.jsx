@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Typography, Box } from "@mui/material";
 import Comment from "./comment";
 import Form from "./form";
@@ -20,7 +20,7 @@ const dummyComments = [
 ];
 
 function CommentList({ comments }) {
-    const [isComment, setComment] = useState(false)
+    // const [isComment, setComment] = useState(false)
 
   if (dummyComments.length === 0)
     return (

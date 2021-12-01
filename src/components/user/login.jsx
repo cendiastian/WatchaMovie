@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 });
 
 export default function Login() {
-  const { updateUser, loadingUpdate } = useUpdateUser();
+  const { updateUser  } = useUpdateUser();
   const styles = useStyles();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({ name: "", id: "" });

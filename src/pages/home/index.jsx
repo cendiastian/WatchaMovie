@@ -5,7 +5,7 @@ import ListCard from "../../components/card/listCard"
 import { useGetAllMovie } from "../../hooks/useGetAllMovie";
 
 export default function Home() {
-  const { allMovie, errorAllMovie, loadingAllMovie } = useGetAllMovie();
+  const { allMovie  } = useGetAllMovie();
 
   const [movie, setMovie] = useState([]);
 

@@ -19,12 +19,12 @@ const movieData = {
 };
 
 export default function Admin() {
-  const { allMovie, errorAllMovie, loadingAllMovie } = useGetAllMovie();
+  const { allMovie, loadingAllMovie } = useGetAllMovie();
   const [update, setUpdate] = useState(false);
   const [AllMovie, setAllMovie] = useState([]);
   const [movie, setMovie] = useState(movieData);
   const [id, setId] = useState(0);
-  const { CreateMovie, loadingCreateMovie } = useCreateMovie();
+  const { CreateMovie  } = useCreateMovie();
 
   const { updateMovie, loadingUpdate } = useUpdateMovie();
 

@@ -2,7 +2,6 @@ import React from "react";
 // import ReactPlayer from "react-player/youtube";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Line from "../../assets/Line 14.png";
 import Box from "@mui/material/Box";
 // import styles from "./styles.module.css";
 export default function Video(props) {

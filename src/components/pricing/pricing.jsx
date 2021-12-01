@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import moment from 'moment'
 
 export default function Pricing(tier) {
-  const { updateUser, loadingUpdate } = useUpdateUser();
+  const { updateUser} = useUpdateUser();
   // const tier = props;
 
   const id = useSelector((state) => state.user.id);

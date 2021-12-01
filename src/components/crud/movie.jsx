@@ -11,7 +11,7 @@ import { useDeleteMovie } from "../../hooks/useDeleteMovie";
 
 export default function BasicTable(props) {
   const movie = props.movie
-  const { deleteMovie, loadingDelete } = useDeleteMovie();
+  const { deleteMovie } = useDeleteMovie();
   const UpdateMode = () => {
     console.log(movie.Genre.id)
     props.setId(movie.id)

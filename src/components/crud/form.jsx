@@ -41,7 +41,7 @@ export default function BasicTextFields(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [AddGenre, setAddGenre] = useState(false);
   const { CreateGenre, loadingCreateGenre } = useCreateGenre();
-  const { allGenre, errorAllGenre, loadingAllGenre } = useGetAllGenre();
+  const { allGenre } = useGetAllGenre();
 
   useEffect(() => {
     if (allGenre) {
@@ -132,6 +132,10 @@ export default function BasicTextFields(props) {
         </Typography>
         }
       </Box>
+      {error && (<><Typography gutterBottom variant="h6" component="div" color="white">
+          Update
+        </Typography></>)
+        }
       <FormControl
         component="form"
         sx={{
