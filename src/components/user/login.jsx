@@ -17,7 +17,8 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { login } from "../../store/userSlice";
 import FormControl from "@mui/material/FormControl";
 import { useGetUser } from "../../hooks/useGetUser";
-// import {useLocalStorage} from "react-use-storage";
+import { useUpdateUser } from "../../hooks/useUpdateUser";
+// import moment from 'moment'
 
 const useStyles = makeStyles({
   container: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
 });
 
 export default function Login() {
-  // const isl= useLocalStorage("isLoggin", false);
+  const { updateUser, loadingUpdate } = useUpdateUser();
   const styles = useStyles();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({ name: "", id: "" });
@@ -56,14 +57,23 @@ export default function Login() {
           id: user.id,
         },
       });
-    } 
+    }
   }, [getUserById, user.id]);
 
   useEffect(() => {
     if (userById?.moviedb_user) {
       console.log(userById);
-      const user = userById.moviedb_user[0]
+      const user = userById.moviedb_user[0];
       console.log(userById.moviedb_user);
+      if (user.expired < new Date()){
+        updateUser({
+          variables: {
+            id: user.id,
+            premium: false,
+            expired: null,
+          },
+        });
+      }
       dispatch(
         login({
           name: user.name,
@@ -77,7 +87,6 @@ export default function Login() {
       // console.log(localStorage.getItem('islogin'));
       // setLogin(true)
       // console.log(isLogin);
-
     }
     setLoading(false);
   }, [dispatch, userById]);
