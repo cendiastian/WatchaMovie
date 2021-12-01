@@ -121,21 +121,34 @@ export default function BasicTextFields(props) {
   return (
     <Container className={styles.container} sx={{ marginTop: 5 }}>
       <Box sx={{ borderBottom: " 1px solid #ABABB1" }}>
-        {!props.update &&
-        <Typography gutterBottom variant="h4" component="div" color="white">
-          Create
-        </Typography>
-        }
-        {props.update &&
-        <Typography gutterBottom variant="h4" component="div" color="white">
-          Update
-        </Typography>
-        }
+        {!props.update && (
+          <Typography gutterBottom variant="h4" component="div" color="white">
+            Create
+          </Typography>
+        )}
+        {props.update && (
+          <Typography gutterBottom variant="h4" component="div" color="white">
+            Update
+          </Typography>
+        )}
       </Box>
-      {error && (<><Typography gutterBottom variant="h6" component="div" color="white">
-          Update
-        </Typography></>)
-        }
+      {error && (
+        <>
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography gutterBottom variant="h3" component="div" color="white">
+              {error}
+            </Typography>
+          </Box>
+        </>
+      )}
       <FormControl
         component="form"
         sx={{
@@ -221,7 +234,9 @@ export default function BasicTextFields(props) {
               // color="outline"
             >
               {genreDB.map((genre) => (
-                <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>
+                <MenuItem key={genre.id} value={genre.id}>
+                  {genre.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
