@@ -12,7 +12,8 @@ const useStyles = makeStyles({
         boxShadow:" 0px -13px 31px rgba(0, 0, 0, 0.24), 0px -4.74521px 11.3155px rgba(0, 0, 0, 0.165596), 0px -2.30371px 5.49347px rgba(0, 0, 0, 0.13351), 0px -1.12932px 2.693px rgba(0, 0, 0, 0.10649), 0px -0.446536px 1.06482px rgba(0, 0, 0, 0.0744044)",
         backgroundColor: "#181818",
         borderRadius: 5,
-        maxWidth: 223,
+        width:"100%",
+        height:"100%",
         // marginTop:10,
     }});
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { Container, Typography, Box } from "@mui/material";
 import Comment from "./comment";
-import { Container, Typography } from "@mui/material";
+import Form from "./form";
 
 const dummyComments = [
   {
@@ -19,25 +20,63 @@ const dummyComments = [
 ];
 
 function CommentList({ comments }) {
-  if (dummyComments.length === 0) return <p>No comment yet.</p>;
+    const [isComment, setComment] = useState(false)
+
+  if (dummyComments.length === 0)
+    return (
+      <Container
+        sx={{
+          backgroundColor: "#212121",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "65%",
+          padding: (5, 5, 5, 5),
+          borderRadius: 5,
+        }}
+      >
+        <Box sx={{ borderBottom: " 1px solid #ABABB1", mb: 3 }}>
+          <Typography
+            gutterBottom
+            variant="h4"
+            component="div"
+            color="white"
+            textAlign="left"
+          >
+            Comments
+          </Typography>
+        </Box>
+        <Form />
+        <Typography variant="h4" component="div" color="white">
+          No comment yet.
+        </Typography>
+        ;
+      </Container>
+    );
   return (
     <Container
       sx={{
-        width: "fit-content",
+        backgroundColor: "#212121",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        width: "65%",
         padding: (5, 5, 5, 5),
         borderRadius: 5,
-        color: "white",
       }}
     >
-      <Typography
-        gutterBottom
-        variant="h5"
-        component="div"
-        // color="white"
-        textAlign="left"
-      >
-        Comments
-      </Typography>
+      <Box sx={{ borderBottom: " 1px solid #ABABB1", mb: 3 }}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="div"
+          color="white"
+          textAlign="left"
+        >
+          Comments
+        </Typography>
+      </Box>
+      <Form />
       {dummyComments.map((comment) => {
         return (
           <Comment

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,17 +6,25 @@ import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Search from "./searchbar";
 import Grid from "@mui/material/Grid";
+import { useSelector } from "react-redux";
+import { Link } from "@mui/material";
 
 export default function PrimarySearchAppBar() {
-  const [isLogin, setIsLogin] = useState(true);
+  const isLogin = useSelector((state) => state.user.isLogin);
+  // console.log(props.isLogin)
   return (
-    <Box sx={{ flexGrow: 1, mb:5,}}>
+    <Box sx={{ flexGrow: 1, mb: 5 }}>
       <AppBar
         position="static"
         sx={{ flexGrow: 1, backgroundColor: "#25274D" }}
       >
         <Toolbar>
-          <Grid container spacing={1} columns={12} sx={{ alignItems:"center"}}>
+          <Grid
+            container
+            spacing={1}
+            columns={12}
+            sx={{ alignItems: "center" }}
+          >
             <Grid item xs={2}>
               <Typography
                 variant="h4"
@@ -43,16 +51,32 @@ export default function PrimarySearchAppBar() {
           </Grid>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {isLogin && <AccountCircle />}
+            {isLogin && (
+              <Link
+                href="/user"
+                sx={{ color: "#ffff", textDecoration: "none" }}
+              >
+                <AccountCircle />
+              </Link>
+            )}
             {!isLogin && (
-              <Typography
+              <Link
                 variant="h6"
                 noWrap
-                component="div"
-                sx={{ display: { xs: "none", sm: "block" } }}
+                component="a"
+                // color="primary.typography"
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "block",
+                    color: "#ffff",
+                    textDecoration: "none",
+                  },
+                }}
+                href="/login"
               >
                 Login
-              </Typography>
+              </Link>
             )}
           </Box>
         </Toolbar>

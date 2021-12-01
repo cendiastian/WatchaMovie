@@ -1,19 +1,21 @@
-import { useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GetMovieById } from "../graphql/query";
 
-export function useGetMovie(movie) {
-  const [
-    getMovieById,
-    {
-      data: questionsByTag,
-      error: errorQuestionsByTag,
-      loading: loadingQuestionsByTag,
+function useGetMovie(id) {
+  const {
+    data: MovieById,
+    error: errorMovieById,
+    loading: loadingMovieById,
+  } = useQuery(GetMovieById, {
+    variables: {
+      id: id,
     },
-  ] = useLazyQuery(GetMovieById);
-  return {  
-    getMovieById,
-    questionsByTag,
-    errorQuestionsByTag,
-    loadingQuestionsByTag,
+  });
+  return {
+    MovieById,
+    errorMovieById,
+    loadingMovieById,
   };
 }
+
+export default useGetMovie;

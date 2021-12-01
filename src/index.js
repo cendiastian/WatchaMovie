@@ -6,15 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 // import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./config/apolloClient";
+import { Provider } from "react-redux";
+import store from "./store";
 
 ReactDOM.render(
+  <Provider store={store}>
   <ApolloProvider client={client}>
     <React.StrictMode>
       {/* <BrowserRouter> */}
         <App />
       {/* </BrowserRouter> */}
     </React.StrictMode>
-  </ApolloProvider>,
+  </ApolloProvider>
+  </Provider>,
   document.getElementById("root")
 );
 
