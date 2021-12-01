@@ -9,9 +9,9 @@ import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import { Link } from "@mui/material";
 
-export default function PrimarySearchAppBar() {
+export default function Nav() {
   const isLogin = useSelector((state) => state.user.isLogin);
-  // console.log(props.isLogin)
+
   return (
     <Box sx={{ flexGrow: 1, mb: 5 }}>
       <AppBar
@@ -23,31 +23,41 @@ export default function PrimarySearchAppBar() {
             container
             spacing={1}
             columns={12}
-            sx={{ alignItems: "center" }}
+            sx={{ alignItems: "center", display: "flex" }}
           >
+            {/* <Box> */}
             <Grid item xs={2}>
-              <Typography
-                variant="h4"
-                noWrap
-                component="div"
-                sx={{ display: { xs: "none", sm: "block" } }}
-              >
-                WatchaMovie
-              </Typography>
+              <Link href="/" sx={{ color: "#ffff", textDecoration: "none" }}>
+                <Typography
+                  variant="h4"
+                  // noWrap
+                  component="div"
+                  // sx={{ display: { xs: "none", sm: "block" } }}
+                >
+                  WatchaMovie
+                </Typography>
+              </Link>
             </Grid>
+            {/* </Box> */}
+            {/* <Box> */}
             <Grid item xs={1}>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ display: { xs: "none", sm: "block" } }}
-              >
-                Subscription
-              </Typography>
+              <Link href="/pricing" sx={{ color: "#ffff", textDecoration: "none" }}>
+                <Typography
+                  variant="h6"
+                  // noWrap
+                  component="div"
+                  // sx={{ display: { xs: "none", sm: "block" } }}
+                >
+                  Subscription
+                </Typography>
+              </Link>
             </Grid>
+            {/* </Box> */}
+            {/* <Box> */}
             <Grid item xs={3}>
               <Search />
             </Grid>
+            {/* </Box> */}
           </Grid>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -62,7 +72,7 @@ export default function PrimarySearchAppBar() {
             {!isLogin && (
               <Link
                 variant="h6"
-                noWrap
+                // noWrap
                 component="a"
                 // color="primary.typography"
                 sx={{

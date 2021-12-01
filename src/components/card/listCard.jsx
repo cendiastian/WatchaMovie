@@ -9,7 +9,6 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 // import Line from "../../assets/Line 13.png";
-import { useGetAllMovie } from "../../hooks/useGetAllMovie";
 import { Link } from "@mui/material";
 
 const useStyles = makeStyles({
@@ -17,7 +16,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: "fit-content",
+    width: "80%",
     backgroundColor: "#212121",
     borderRadius: 15,
     paddingTop: 20,
@@ -29,7 +28,7 @@ const usedStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: "65%",
+    minWidth: "65%",
     backgroundColor: "#212121",
     borderRadius: 15,
     paddingTop: 20,
@@ -38,20 +37,42 @@ const usedStyles = makeStyles({
 });
 
 export default function BasicGrid(props) {
-  const { allMovie, errorAllMovie, loadingAllMovie } = useGetAllMovie();
-
-  const [movie, setMovie] = useState([]);
-
-  useEffect(() => {
-    if (allMovie) {
-      console.log(allMovie);
-      setMovie(allMovie.moviedb_movie);
-    }
-  }, [allMovie]);
-
+  let movie = props.movie;
   let styles = useStyles();
   if (props.length === 8) {
     styles = usedStyles();
+  }
+  if (movie.length === 0) {
+    return (
+    <Container className={styles.container}>
+      <Box sx={{ borderBottom: " 1px solid #ABABB1", mb: 5 }}>
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="div"
+          color="white"
+          textAlign="left"
+        >
+          Movie
+        </Typography>
+      </Box>
+      <Grid
+        container
+        spacing={2}
+        columns={props.length}
+        // justifyContent={"space-a"}
+      >
+              <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          color="white"
+          textAlign="center"
+        >
+          Not Found..
+        </Typography>
+      </Grid>
+      </Container>)
   }
   return (
     <Container className={styles.container}>

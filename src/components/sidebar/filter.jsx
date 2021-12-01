@@ -1,29 +1,46 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-// import TextField from "@mui/material/TextField";
-import { Typography, Container, FormControl, RadioGroup, Radio } from "@mui/material";
-// import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-// import Line from "../../assets/Line 13.png";
-// import { makeStyles } from "@mui/styles";
+import {
+  Typography,
+  Container,
+//   FormControl,
+//   RadioGroup,
+//   Radio,
+} from "@mui/material";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+import { Link } from "@mui/material";
+// import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom";
+import { useGetAllGenre } from "../../hooks/useGetAllGenre";
 
-// const useStyles = makeStyles({
-//   container: {
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center",
-//     color: "white",
-//     width: 800,
-//     backgroundColor: "#212121",
-//     borderRadius: 15,
-//     padding: (20, 20, 20, 20),
-//   },
-//   white: {
-//     color: "#fffff",
-//   },
-// });
 export default function BasicTextFields() {
-  //   const styles = useStyles();
+//     const [searchParams, setSearchParams] = useSearchParams();
+//   const navigate = useNavigate();
+//   const ClickHandler = (e) => {
+//       console.log("masuk" + e.target.name + e.target.value)
+//     if (e.target.name === "order") {
+//         console.log("masuk order")
+//       navigate({
+//         pathname: "/search",
+//         order: `?${createSearchParams(e.target.value)}`,
+//       });
+//     } else {
+//         console.log("masuk genre")
+//       navigate({
+//         pathname: "/search",
+//         genre: `?${createSearchParams(e.target.value)}`,
+//       });
+//     }
+//   };
+  const [genreDB, setGenreDB] = useState([]);
+
+  const { allGenre, errorAllGenre, loadingAllGenre } = useGetAllGenre();
+
+  useEffect(() => {
+    if (allGenre) {
+      setGenreDB(allGenre.moviedb_genre);
+    }
+  }, [allGenre]);
+
   return (
     <Container
       sx={{
@@ -48,75 +65,61 @@ export default function BasicTextFields() {
           borderBottom: " 1px solid #ABABB1",
         }}
       >
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="div"
-          color="white"
-        >
+        <Typography gutterBottom variant="h6" component="div" color="white">
           Order
         </Typography>
-        <FormControl component="fieldset">
-          <RadioGroup
-            // aria-label="gender"
-            // name="controlled-radio-buttons-group"
-            // value={value}
-            // onChange={handleChange}
-          >
-            <FormControlLabel
-              value="oldest"
-              control={<Radio color="outline"/>}
-              sx={{ color: "white" }}
-              label="Oldest"
-            />
-            <FormControlLabel value="newest" control={<Radio color="outline"/>} sx={{ color: "white" }} label="Newest" />
-          </RadioGroup>
-        </FormControl>
+        <Link href={`/order/asc`}>
+        <Typography
+          gutterBottom
+          variant="subtitle1"
+          component="button"
+          sx={{background:"none", border:"none",}}
+          color="white"
+          name="order"
+          value="oldest"
+        //   onClick={ClickHandler}
+        >
+          Oldest 
+        </Typography>
+        </Link>
+        <Link href={`/order/desc`}>
+        <Typography
+          gutterBottom
+          variant="subtitle1"
+          component="button"
+          sx={{background:"none", border:"none",}}
+          color="white"
+          name="order"
+          value="newest"
+        //   onClick={ClickHandler}
+        >
+          Newest
+        </Typography>
+        </Link>
       </Box>
       <Box
         sx={{ width: "100%", display: "flex", flexDirection: "column", pt: 2 }}
       >
-        {/* </Box>
-      <Box sx={{ width: "50%", display:'flex', pl:3 }}> */}
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="div"
-          color="white"
-          //   sx={{ textAlign: "center" }}
-        >
+        <Typography gutterBottom variant="h6" component="div" color="white">
           Genre
         </Typography>
-        {/* </Box>
-      <Box sx={{ width: "50%", display:'flex', pl:3 }}> */}
-        <Typography
-          gutterBottom
-          variant="subtitle1"
-          component="p"
-          color="white"
-          //   sx={{ textAlign: "center" }}
-        >
-          Adventure
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="subtitle1"
-          component="p"
-          color="white"
-          //   sx={{ textAlign: "center" }}
-        >
-          Fantasy
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="subtitle1"
-          component="p"
-          color="white"
-          //   sx={{ textAlign: "center" }}
-        >
-          Action
-        </Typography>
-        {/* </Box> */}
+        {genreDB.map((genre) => (
+            <Link href={`/filter/${genre.id}`}>
+          <Typography
+            key={genre.id}
+            gutterBottom
+            variant="subtitle1"
+            component="button"
+            sx={{background:"none", border:"none",}}
+            color="white"
+            name="genre"
+            value={genre.name}
+            // onClick={ClickHandler}
+          >
+            {genre.name}
+          </Typography>
+          </Link>
+        ))}
       </Box>
     </Container>
   );

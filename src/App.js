@@ -13,8 +13,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  // useNavigate,
-  // createSearchParams
 } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
@@ -59,26 +57,10 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  // const navigate = useNavigate();
-
-  // const params = [
-  //   ['sort', 'date'],
-  //   ['order', 'newest'],
-  // ];
-  // const searchBar = (params) =>
-  // navigate({
-  //   pathname: '/search',
-  //   search: `?${createSearchParams(params)}`,
-  // });
-
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const [user, setUser] = useState({ name: "", id: "" });
   const { getUserById, userById } = useGetUser();
-  // const routing = useRoutes(routes(isLogin));
-  // const isLogin =
-  // const item = useSelector((state) => state.user.isLogin);
-  // Login = localstorage.get
 
   useEffect(() => {
     if (user.id) {
