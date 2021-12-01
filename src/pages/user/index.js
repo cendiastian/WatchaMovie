@@ -1,21 +1,19 @@
-import React from "react";
-// import Nav from "../../components/navbar/navbar";
+import React, { useState } from "react";
 import Profil from "../../components/user/profil";
 import SideBar from "../../components/sidebar/user";
-// import Card from "./components/card/card.jsx";
-// import Footer from "../../components/footer/footer.jsx";
-// import Link from "@mui/material/Link";
+import { useSelector } from "react-redux";
 import { Container } from "@mui/material";
 
 export default function Home() {
-  return (
+    const user = useSelector((state) => state.user);
+    return (
     <>
       {/* <Nav /> */}
       <Container
         sx={{ display: "flex", justifyContent: "space-between", ml: 5, mr: 5 }}
       >
         <SideBar />
-        <Profil />
+        <Profil data={user}/>
       </Container>
       {/* <Footer /> */}
     </>

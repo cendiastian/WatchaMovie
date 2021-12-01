@@ -22,10 +22,17 @@ export const InsertNewUser = gql`
   }
 `;
 
-const DeleteMovie = gql`
-  mutation MyMutation($id: Int!) {
-    delete_moviedb_movie_by_pk(id: $id) {
-      id
+export const UpdateUser = gql`
+  mutation MyMutation(
+    $id: String = ""
+    $premium: Boolean = false
+    $expired: timestamptz = ""
+  ) {
+    update_moviedb_user_by_pk(
+      pk_columns: { id: $id }
+      _set: { premium: $premium, expired: $expired }
+    ){
+        id
     }
   }
 `;
@@ -61,5 +68,11 @@ const UpdateMovie = gql`
     }
   }
 `;
-
+const DeleteMovie = gql`
+  mutation MyMutation($id: Int!) {
+    delete_moviedb_movie_by_pk(id: $id) {
+      id
+    }
+  }
+`;
 export { DeleteMovie, UpdateMovie };

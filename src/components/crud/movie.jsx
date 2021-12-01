@@ -1,79 +1,59 @@
-// import "./Home.css";
-// const ListItem = (props) => {
-//   const { id, nama, umur, jenis_kelamin } = props.data;
-//   const editHandler = () => {
-//     props.onEdit({
-//       nama,
-//       umur,
-//       jenis_kelamin,
-//       id,
-//     });
-//   };
-//   return (
-//     <tr>
-//       <td>{nama}</td>
-//       <td>{umur}</td>
-//       <td>{jenis_kelamin}</td>
-//       <td className="removeBorder" onClick={() => props.hapusPengunjung(id)}>
-//         <button>Hapus</button>
-//       </td>
-//       <td className="removeBorder" onClick={editHandler}>
-//         <button>Edit</button>
-//       </td>
-//     </tr>
-//   );
-// };
-
-// export default ListItem
-
-import * as React from 'react';
+import * as React from "react";
 // import Table from '@mui/material/Table';
 // import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell from "@mui/material/TableCell";
 // import TableContainer from '@mui/material/TableContainer';
 // import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import TableRow from "@mui/material/TableRow";
 // import Paper from '@mui/material/Paper';
 import Button from "@mui/material/Button";
+import { useDeleteMovie } from "../../hooks/useDeleteMovie";
 
-export default function BasicTable(row) {
+export default function BasicTable(props) {
+  const movie = props.movie
+  const { deleteMovie, loadingDelete } = useDeleteMovie();
+  const UpdateMode = () => {
+    console.log(movie.Genre.id)
+    props.setId(movie.id)
+    props.setMovie({
+      Title: movie.Title,
+      Released: movie.Released,
+      Writer: movie.Writer,
+      Plot: movie.Plot,
+      Poster: movie.Poster,
+      imdbID: movie.imdbID,
+      Genre: movie.Genre,
+      Runtime: movie.Runtime,
+      Video: movie.Video,
+    })
+    props.updateMode(true)
+  }
+  const DeleteHandler = () => {
+    console.log("Create genre");
+    deleteMovie({
+      variables: {
+        id: movie.id,
+      },
+    })
+  };
   return (
-    // <TableContainer component={Paper}>
-    //   <Table sx={{ minWidth: 650 }} aria-label="simple table">
-    //     <TableHead>
-    //       <TableRow>
-    //         <TableCell>Dessert (100g serving)</TableCell>
-    //         <TableCell align="right">Calories</TableCell>
-    //         <TableCell align="right">Fat&nbsp;(g)</TableCell>
-    //         <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-    //         <TableCell align="right">Protein&nbsp;(g)</TableCell>
-    //       </TableRow>
-    //     </TableHead>
-    //     <TableBody>
-          // {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.title}
-              </TableCell>
-              <TableCell align="center">{row.duration}</TableCell>
-              <TableCell align="center">{row.size}</TableCell>
-              <TableCell align="center">                  
-              <Button variant="contained">
-                Update
-              </Button>
-              </TableCell>
-              <TableCell align="center">
-              <Button variant="contained" color="danger">
-                Delete
-              </Button>
-              </TableCell>
-            </TableRow>
-          // ))}
-        /* </TableBody>
-      </Table>
-    </TableContainer> */
+    <TableRow
+      key={movie.id}
+      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+    >
+      <TableCell component="th" scope="row">
+        {movie.Title}
+      </TableCell>
+      <TableCell align="center">{movie.Runtime}</TableCell>
+      <TableCell align="center">{movie.imdbID}</TableCell>
+      <TableCell align="center">
+        <Button variant="contained" onClick={UpdateMode}>Update</Button>
+      </TableCell>
+      <TableCell align="center">
+        <Button variant="contained" onClick={DeleteHandler} color="danger">
+          Delete
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 }
