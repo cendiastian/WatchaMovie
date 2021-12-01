@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   container: {

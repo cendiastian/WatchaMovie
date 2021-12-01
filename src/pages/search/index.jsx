@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 export default function Search() {
   const { title } = useParams();
   console.log(title);
-  const { MovieByTitle, errorMovieByTitle, loadingMovieByTitle } =
+  const { MovieByTitle } =
     useGetMovieByTitle("%" + title + "%");
   const [movie, setMovie] = useState([]);
 

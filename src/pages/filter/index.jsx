@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 export default function FilterPage( ) {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
-  const { MovieByGenre, errorMovieByGenre, loadingMovieByGenre } = useGetMovieByGenre(Number(id));
+  const { MovieByGenre  } = useGetMovieByGenre(Number(id));
   
   useEffect(() => {
     if (MovieByGenre) {

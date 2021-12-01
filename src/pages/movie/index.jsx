@@ -38,6 +38,16 @@ export default function Movie() {
   loadingMovieByLimit;
   return (
     <>
+      {isError && (<><Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}><p>Something is Wrong</p></Box>
+        </>)
+      }
       {!isLoading && (
         <>
           <Video video={movie.Video} />
