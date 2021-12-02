@@ -5,9 +5,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Search from "./searchbar";
-import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
-import { Link } from "@mui/material";
+import { Container, Link } from "@mui/material";
 
 export default function Nav() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -19,14 +18,15 @@ export default function Nav() {
         sx={{ flexGrow: 1, backgroundColor: "#25274D" }}
       >
         <Toolbar>
-          <Grid
+          <Container
             container
             spacing={1}
             columns={12}
-            sx={{ alignItems: "center", display: "flex" }}
+            sx={{ alignItems: "center", display: "flex", flexWrap:"nowarp" }}
           >
-            {/* <Box> */}
-            <Grid item xs={2}>
+            <Box sx={{ alignItems: "center", display: "flex", flexWrap:"nowarp", columnGap:2 }}>
+            {/* <Grid item xs={2}> */}
+            <Box sx={{width:"80%"}}>
               <Link href="/" sx={{ color: "#ffff", textDecoration: "none" }}>
                 <Typography
                   variant="h4"
@@ -37,10 +37,12 @@ export default function Nav() {
                   WatchaMovie
                 </Typography>
               </Link>
-            </Grid>
+              </Box>
+            {/* </Grid> */}
             {/* </Box> */}
             {/* <Box> */}
-            <Grid item xs={1}>
+            {/* <Grid item xs={1}> */}
+            <Box sx={{width:"80%"}}>
               <Link href="/pricing" sx={{ color: "#ffff", textDecoration: "none" }}>
                 <Typography
                   variant="h6"
@@ -51,16 +53,17 @@ export default function Nav() {
                   Subscription
                 </Typography>
               </Link>
-            </Grid>
-            {/* </Box> */}
-            {/* <Box> */}
-            <Grid item xs={3}>
+              </Box>
+            {/* </Grid> */}
+            </Box>
+            <Box sx={{width:"35%",}}>
+            {/* <Grid item xs={3}> */}
               <Search />
-            </Grid>
-            {/* </Box> */}
-          </Grid>
+            {/* </Grid> */}
+            </Box>
+          </Container>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display:"flex"}}>
             {isLogin && (
               <Link
                 href="/user"

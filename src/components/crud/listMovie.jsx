@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: 800,
+    width: "65%",
     backgroundColor: "#212121",
     borderRadius: 15,
     padding: (20, 20, 20, 20),
