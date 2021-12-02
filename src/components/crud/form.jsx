@@ -149,6 +149,7 @@ export default function BasicTextFields(props) {
           </Box>
         </>
       )}
+      {!error && (
       <FormControl
         component="form"
         sx={{
@@ -440,6 +441,7 @@ export default function BasicTextFields(props) {
           </Box>
         )}
       </FormControl>
+      )}
     </Container>
   );
 }
