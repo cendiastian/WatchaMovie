@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect} from "react";
 import {  Outlet, useNavigate  } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -8,10 +8,12 @@ function AdminRoute() {
   const navigate = useNavigate();
   // let location = useLocation();
 
+  useEffect(() => {
   if (role === "user") {
     console.log("navigate ke home");
     navigate('/');
   }
+}, [role]);
 
   return <Outlet/>;
 }

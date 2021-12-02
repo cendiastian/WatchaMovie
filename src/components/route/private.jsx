@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -7,10 +7,12 @@ function PrivateRoute() {
   console.log("ISLOGIN = ", user);
   const navigate = useNavigate();
   // let location = useLocation();
+  useEffect(() => {
   if (!user) {
     console.log("navigate login");
     navigate("/login");
   }
+}, [user]);
   return (
     <div>
       <Outlet />
