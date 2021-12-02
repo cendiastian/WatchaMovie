@@ -56,7 +56,7 @@ export default function Nav() {
               </Box>
             {/* </Grid> */}
             </Box>
-            <Box sx={{width:"35%",}}>
+            <Box sx={{width:"30%",}}>
             {/* <Grid item xs={3}> */}
               <Search />
             {/* </Grid> */}
