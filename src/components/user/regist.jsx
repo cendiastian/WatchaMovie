@@ -6,13 +6,14 @@ import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/userSlice";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useInsertNewUser } from "../../hooks/useInsertNewUser";
 import { Alert } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useNavigate } from "react-router";
 
 const useStyles = makeStyles({
   container: {
@@ -40,7 +41,14 @@ export default function Login() {
   const [loadingAuth, setLoadingAuth] = useState(false);
   const { insertUser, errorInsertUser, loadingInsertUser } = useInsertNewUser();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.user.isLogin);
+  
+  if (isLogin) {
+    console.log("masuk");
+    console.log(isLogin);
+    navigate("/");
+  }
   const registerHandler = (e) => {
     console.log("masuk");
     e.preventDefault();
@@ -67,6 +75,7 @@ export default function Login() {
             })
           );
           setLoadingAuth(false);
+
         });
       })
       .catch((err) => {
