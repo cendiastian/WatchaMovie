@@ -121,31 +121,7 @@ export default function Profil(props) {
               color="white"
               sx={{ width: "50%", textAlign: "left" }}
             >
-              : {status} {user.role && <Link href="/admin" component="a" sx={{background:"none", border:"none", textDecoration: 'none'}}>{user.role} </Link>}{!user.role && <span>{user.role}</span>}
-            </Typography>
-          </Box>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, padding: 2 }}>
-          <Box sx={{ width: "20%" }}>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="p"
-              color="white"
-              sx={{ textAlign: "left" }}
-            >
-              Nama
-            </Typography>
-          </Box>
-          <Box sx={{ width: "70%" }}>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="p"
-              color="white"
-              sx={{ width: "50%", textAlign: "left" }}
-            >
-              : Lorem Ipsum
+              : {status} {user.role === "admin" && <Link href="/admin" component="a" sx={{background:"none", border:"none", textDecoration: 'none'}}>{user.role} </Link>}{user.role !== "admin" && <span>{user.role}</span>}
             </Typography>
           </Box>
         </Box>

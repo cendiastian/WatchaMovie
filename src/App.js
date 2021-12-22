@@ -77,6 +77,7 @@ function App() {
       console.log(userById);
       const user = userById.moviedb_user[0];
       console.log(userById.moviedb_user);
+      if (userById.moviedb_user.length !== 0){
       dispatch(
         login({
           name: user.name,
@@ -86,6 +87,7 @@ function App() {
           expired: user.expired,
         })
       );
+    }
     }
     return () => {
       setLoading(false);
