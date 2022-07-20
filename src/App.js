@@ -95,7 +95,6 @@ function App() {
   }, [userById]);
 
   useEffect(() => {
-    console.log("tes");
     const unsubs = onAuthStateChanged(
       auth,
       (userAuth) => {
