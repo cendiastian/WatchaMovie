@@ -49,7 +49,16 @@ export default function BasicTextFields() {
           color="white"
         //   sx={{ textAlign: "center" }}
         >
-          Transaction
+          Booking
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          color="white"
+        //   sx={{ textAlign: "center" }}
+        >
+          Wishlist
         </Typography>
       {/* </Box>
       <Box sx={{ width: "50%", display:'flex', pl:3 }}> */}
