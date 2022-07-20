@@ -48,20 +48,15 @@ export default function Home() {
   const navigate = useNavigate();
   const order_id = searchParams.get("order_id")
   const { updateUser } = useUpdateUser();
-
-  const [expired, setExp] = useState(false);
   const handeleClose = () => {
     setSucces(false);
     navigate('/');
   };
   useEffect(() => {
-    if (searchParams.get(
-      "order_id" != null
-    )){
-      
+    if (order_id){ 
       axios
       .get(
-        `127.0.0.1:8000/invoice/?id=${order_id}&user_id=${id}`,
+        `https://f13c-110-138-82-117.ap.ngrok.io/invoice/?id=${order_id}&user_id=${id}`,
         {
           headers: {
             accept: "*/*",
@@ -70,12 +65,11 @@ export default function Home() {
         }
       )
       .then(function (response) {
-        setExp (response.data.expired)
         updateUser({
           variables: {
             id: id,
             premium: true,
-            expired: expired,
+            expired: moment().add(response.data.data.Expired, 'd'),
           },
         });
         setMessage("You are Premium now");
@@ -83,9 +77,7 @@ export default function Home() {
       })
 
     }
-  }, [searchParams.get(
-    "order_id"
-  )])
+  }, [order_id])
 
   if (succes === true) {
     return (
@@ -123,9 +115,6 @@ export default function Home() {
       </>
     );
   }
-
-  
-  console.log(tiers);
   return (
     <>
       <Container
