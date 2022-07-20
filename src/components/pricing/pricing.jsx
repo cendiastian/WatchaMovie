@@ -23,7 +23,7 @@ export default function Pricing(tier) {
     }else {
       axios
     .post(
-      `http://127.0.0.1:8000/invoice/add`,
+      `https://1fb7-110-138-82-117.ap.ngrok.io/invoice/add`,
       {
         user_id:id,
         item: tier.title,
