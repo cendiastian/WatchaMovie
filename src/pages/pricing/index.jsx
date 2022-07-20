@@ -1,41 +1,130 @@
-import { Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import { Box, Container, Grid, Modal, Typography } from "@mui/material";
+import React, { useState,useEffect } from "react";
 // import Nav from "../../components/navbar/navbar"
 import Pricing from "../../components/pricing/pricing";
 // import Card from "./components/card/card.jsx";
 // import Footer from "../../components/footer/footer.jsx";
 import moment from 'moment'
+import { useUpdateUser } from "../../hooks/useUpdateUser";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import {  useNavigate  } from "react-router-dom";
 
 
 const tiers = [
   {
     title: "1 Day",
-    price: "10.000",
+    price: 10000,
     description: ["Mendapat akses untuk menonton film selama 1 hari"],
-    buttonText: "Sign up for free",
+    // buttonText: "Sign up for free",
     buttonVariant: "outlined",
-    expired: moment().add(1, 'd'),
+    expired: 1,
   },
   {
-    title: "2 Day",
+    title: "10 Day",
     //   subheader: 'Most popular',
-    price: "20.000",
-    description: ["Mendapat akses untuk menonton film selama 2 hari"],
-    buttonText: "Get started",
+    price: 100000,
+    description: ["Mendapat akses untuk menonton film selama 10 hari"],
+    // buttonText: "Get started",
     buttonVariant: "contained",
-    expired: moment().add(2, 'd'),
+    expired: 10,
   },
   {
-    title: "3 Day",
-    price: "30.000",
-    description: ["Mendapat akses untuk menonton film selama 3 hari"],
-    buttonText: "Contact us",
+    title: "30 Day",
+    price: 300000,
+    description: ["Mendapat akses untuk menonton film selama 30 hari"],
+    // buttonText: "Contact us",
     buttonVariant: "outlined",
-    expired: moment().add(3, 'd'),
+    expired: 30,
   },
 ];
 
 export default function Home() {
+  const [searchParams] = useSearchParams();
+  const [succes, setSucces] = useState(false);
+  const [message, setMessage] = useState("");
+  const id = useSelector((state) => state.user.id);
+  const navigate = useNavigate();
+  const order_id = searchParams.get("order_id")
+  const { updateUser } = useUpdateUser();
+
+  const [expired, setExp] = useState(false);
+  const handeleClose = () => {
+    setSucces(false);
+    navigate('/');
+  };
+  useEffect(() => {
+    if (searchParams.get(
+      "order_id" != null
+    )){
+      
+      axios
+      .get(
+        `127.0.0.1:8000/invoice/?id=${order_id}&user_id=${id}`,
+        {
+          headers: {
+            accept: "*/*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        setExp (response.data.expired)
+        updateUser({
+          variables: {
+            id: id,
+            premium: true,
+            expired: expired,
+          },
+        });
+        setMessage("You are Premium now");
+        setSucces(true);
+      })
+
+    }
+  }, [searchParams.get(
+    "order_id"
+  )])
+
+  if (succes === true) {
+    return (
+      <>
+        <Modal
+          open={succes}
+          onClose={handeleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              width: "25%",
+              height: "25%",
+              backgroundColor: "#212121",
+              borderRadius: 10,
+              border: " 1px solid #ABABB1"
+            }}
+          >
+            <Typography variant="h4" component="div" color="white" textAlign="center">
+              {message}
+            </Typography>
+          </Box>
+        </Modal>
+      </>
+    );
+  }
+
+  
   console.log(tiers);
   return (
     <>
@@ -68,6 +157,8 @@ export default function Home() {
               buttonText={data.buttonText}
               buttonVariant={data.buttonVariant}
               expired={data.expired}
+              setSucces={setSucces}
+              setMessage={setMessage}
             />
           ))}
         </Grid>

@@ -49,12 +49,11 @@ export default function Movie() {
         </>)
       }
       {!isLoading && (
-        <>
+        <Box sx={{display: 'flex', flexDirection:'column', gap:'5vh'}}>
           <Video video={movie.Video} />
           <Detail movie={movie} />
           <ListCard length={8} movie={movieByLimit}/>
-          <ListComment />
-        </>
+        </Box>
       )}
       {isLoading && (
         <>
