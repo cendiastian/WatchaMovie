@@ -174,7 +174,7 @@ export default function Login() {
             <Link
               href="#"
               color="#ABABB1"
-              sx={{ textDecoration: "none", fontWeight: "bold" }}
+              sx={{ textDecoration: "none", fontWeight: "bold", textAlign: "center", }}
             >
               Forgot password?
             </Link>
