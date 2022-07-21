@@ -56,7 +56,7 @@ export default function Home() {
     if (order_id){ 
       axios
       .get(
-        `https://2eb1-110-138-82-117.ap.ngrok.io/invoice/?id=${order_id}&user_id=${id}`,
+        `http://3.20.235.210:8000/invoice?id=${order_id}&user_id=${id}`,
         {
           headers: {
             accept: "*/*",
