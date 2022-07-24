@@ -23,7 +23,7 @@ export default function Pricing(tier) {
     }else {
       axios
     .post(
-      `http://3.20.235.210:8000/invoice/add`,
+      `https://watchamovie-payment.herokuapp.com/invoice/add`,
       {
         user_id:id,
         item: tier.title,

@@ -56,7 +56,7 @@ export default function Home() {
     if (order_id){ 
       axios
       .get(
-        `http://3.20.235.210:8000/invoice?id=${order_id}&user_id=${id}`,
+        `https://watchamovie-payment.herokuapp.com/invoice?id=${order_id}&user_id=${id}`,
         {
           headers: {
             accept: "*/*",
