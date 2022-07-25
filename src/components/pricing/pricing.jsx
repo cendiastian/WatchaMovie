@@ -11,9 +11,9 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 export default function Pricing(tier) {
-  const id = useSelector((state) => state.user.id);
-  const name = useSelector((state) => state.user.name);
-  const exp = useSelector((state) => state.user.expired);
+  const id = useSelector((state) => state.persistedReducer.user.id);
+  const name = useSelector((state) => state.persistedReducer.user.name);
+  const exp = useSelector((state) => state.persistedReducer.user.expired);
 
   const BuySubs = () => {
     if (exp !== null) {

@@ -44,7 +44,7 @@ export default function Home() {
   const [searchParams] = useSearchParams();
   const [succes, setSucces] = useState(false);
   const [message, setMessage] = useState("");
-  const id = useSelector((state) => state.user.id);
+  const id = useSelector((state) => state.persistedReducer.user.id);
   const navigate = useNavigate();
   const order_id = searchParams.get("order_id")
   const { updateUser } = useUpdateUser();

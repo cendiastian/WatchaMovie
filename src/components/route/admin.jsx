@@ -3,7 +3,7 @@ import {  Outlet, useNavigate  } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function AdminRoute() {
-  const role = useSelector((state) => state.user.role);
+  const role = useSelector((state) => state.persistedReducer.user.role);
   console.log("FROM PUBLIC ROUTE = ", role);
   const navigate = useNavigate();
   // let location = useLocation();

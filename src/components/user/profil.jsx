@@ -42,6 +42,8 @@ export default function Profil(props) {
   useEffect(() => {
     if (user.premium) {
       setStatus("Premium");
+    } else {
+      setStatus("Free");
     }
   }, [user.premium]);
   const [open, setOpen] = useState(false);
@@ -121,7 +123,7 @@ export default function Profil(props) {
               color="white"
               sx={{ width: "50%", textAlign: "left" }}
             >
-              : {status} {user.role === "admin" && <Link href="/admin" component="a" sx={{background:"none", border:"none", textDecoration: 'none'}}>{user.role} </Link>}{user.role !== "admin" && <span>{user.role}</span>}
+              : {user.role !== "admin" &&<span>{status}</span>} {user.role}
             </Typography>
           </Box>
         </Box>

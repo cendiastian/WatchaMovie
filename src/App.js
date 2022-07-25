@@ -16,12 +16,12 @@ import {
 } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { login, logout } from "./store/userSlice";
-import { onAuthStateChanged } from "@firebase/auth";
-import { auth } from "./config/firebase";
+// import { useDispatch } from "react-redux";
+// import { login, logout } from "./store/userSlice";
+// import { onAuthStateChanged } from "@firebase/auth";
+// import { auth } from "./config/firebase";
 import { CircularProgress } from "@mui/material";
-import { useGetUser } from "./hooks/useGetUser";
+// import { useGetUser } from "./hooks/useGetUser";
 import { Box } from "@mui/system";
 import PremiumRoute from "./components/route/premium";
 import PrivateRoute from "./components/route/private";
@@ -57,65 +57,65 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
-  const [user, setUser] = useState({ name: "", id: "" });
-  const { getUserById, userById } = useGetUser();
+  const [loading, setLoading] = useState(false);
+  // const dispatch = useDispatch();
+  // const [user, setUser] = useState({ name: "", id: "" });
+  // const { getUserById, userById } = useGetUser();
 
-  useEffect(() => {
-    if (user.id) {
-      getUserById({
-        variables: {
-          id: user.id,
-        },
-      });
-    }
-  }, [user.id]);
+  // useEffect(() => {
+  //   if (user.id) {
+  //     getUserById({
+  //       variables: {
+  //         id: user.id,
+  //       },
+  //     });
+  //   }
+  // }, [user.id]);
 
-  useEffect(() => {
-    if (userById?.moviedb_user) {
-      console.log(userById);
-      const user = userById.moviedb_user[0];
-      console.log(userById.moviedb_user);
-      if (userById.moviedb_user.length !== 0){
-      dispatch(
-        login({
-          name: user.name,
-          id: user.id,
-          role: user.role,
-          premium: user.premium,
-          expired: user.expired,
-        })
-      );
-    }
-    }
-    return () => {
-      setLoading(false);
-    };
-  }, [userById]);
+  // useEffect(() => {
+  //   if (userById?.moviedb_user) {
+  //     console.log(userById);
+  //     const user = userById.moviedb_user[0];
+  //     console.log(userById.moviedb_user);
+  //     if (userById.moviedb_user.length !== 0){
+  //     dispatch(
+  //       login({
+  //         name: user.name,
+  //         id: user.id,
+  //         role: user.role,
+  //         premium: user.premium,
+  //         expired: user.expired,
+  //       })
+  //     );
+  //   }
+  //   }
+  //   return () => {
+  //     setLoading(false);
+  //   };
+  // }, [userById]);
 
-  useEffect(() => {
-    const unsubs = onAuthStateChanged(
-      auth,
-      (userAuth) => {
-        if (userAuth !== null) {
-          setUser({
-            name: userAuth.displayName,
-            id: userAuth.uid,
-          });
-          // setLoading(false);
-        } else {
-          dispatch(logout());
-          setLoading(false);
-        }
-      },
-      (error) => {
-        alert(error);
-        setLoading(false);
-      }
-    );
-    return () => unsubs;
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const unsubs = onAuthStateChanged(
+  //     auth,
+  //     (userAuth) => {
+  //       if (userAuth !== null) {
+  //         setUser({
+  //           name: userAuth.displayName,
+  //           id: userAuth.uid,
+  //         });
+  //         // setLoading(false);
+  //       } else {
+  //         dispatch(logout());
+  //         setLoading(false);
+  //       }
+  //     },
+  //     (error) => {
+  //       alert(error);
+  //       setLoading(false);
+  //     }
+  //   );
+  //   return () => unsubs;
+  // }, [dispatch]);
 
   return (
     <ThemeProvider theme={darkTheme}>

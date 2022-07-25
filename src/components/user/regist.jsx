@@ -42,7 +42,7 @@ export default function Login() {
   const { insertUser, errorInsertUser, loadingInsertUser } = useInsertNewUser();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state) => state.persistedReducer.user.isLogin);
   
   if (isLogin) {
     console.log("masuk");

@@ -42,36 +42,6 @@ export default function BasicTextFields() {
         </Typography>
       {/* </Box>
       <Box sx={{ width: "50%", display:'flex', pl:3 }}> */}
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="div"
-          color="white"
-        //   sx={{ textAlign: "center" }}
-        >
-          Booking
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="div"
-          color="white"
-        //   sx={{ textAlign: "center" }}
-        >
-          Wishlist
-        </Typography>
-      {/* </Box>
-      <Box sx={{ width: "50%", display:'flex', pl:3 }}> */}
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="p"
-          color="white"
-        //   sx={{ textAlign: "center" }}
-        >
-          Setting
-        </Typography>
-        {/* </Box> */}
       </Box>
     </Container>
   );

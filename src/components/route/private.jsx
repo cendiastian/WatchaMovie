@@ -3,7 +3,7 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PrivateRoute() {
-  const user = useSelector((state) => state.user.isLogin);
+  const user = useSelector((state) => state.persistedReducer.user.isLogin);
   console.log("ISLOGIN = ", user);
   const navigate = useNavigate();
   // let location = useLocation();

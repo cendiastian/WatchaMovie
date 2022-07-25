@@ -7,17 +7,20 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./config/apolloClient";
 import { Provider } from "react-redux";
-import store from "./store";
+import { PersistGate } from "redux-persist/es/integration/react";
+import {store, persistor} from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
-  <ApolloProvider client={client}>
-    <React.StrictMode>
-      {/* <BrowserRouter> */}
-        <App />
-      {/* </BrowserRouter> */}
-    </React.StrictMode>
-  </ApolloProvider>
+    <PersistGate persistor={persistor}>
+      <ApolloProvider client={client}>
+        <React.StrictMode>
+          {/* <BrowserRouter> */}
+          <App />
+          {/* </BrowserRouter> */}
+        </React.StrictMode>
+      </ApolloProvider>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

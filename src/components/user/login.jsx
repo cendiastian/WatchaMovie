@@ -45,8 +45,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const isLogin = useSelector((state) => state.user.isLogin);
-  const role = useSelector((state) => state.user.role);
+  const isLogin = useSelector((state) => state.persistedReducer.user.isLogin);
+  const role = useSelector((state) => state.persistedReducer.user.role);
   const dispatch = useDispatch();
   const { getUserById, userById } = useGetUser();
   // const { id, name, role, premium, expired } = userById.moviedb_user;

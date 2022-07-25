@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { Container, Link } from "@mui/material";
 
 export default function Nav() {
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const user = useSelector((state) => state.persistedReducer.user);
 
   return (
     <Box sx={{ flexGrow: 1, mb: 5 }}>
@@ -43,6 +43,18 @@ export default function Nav() {
             {/* <Box> */}
             {/* <Grid item xs={1}> */}
             <Box sx={{width:"80%"}}>
+            {user.role === 'admin' ? (
+              <Link href="/admin" sx={{ color: "#ffff", textDecoration: "none" }}>
+                <Typography
+                  variant="h6"
+                  // noWrap
+                  component="div"
+                  // sx={{ display: { xs: "none", sm: "block" } }}
+                >
+                  Dashboard
+                </Typography>
+              </Link>
+              ):(
               <Link href="/pricing" sx={{ color: "#ffff", textDecoration: "none" }}>
                 <Typography
                   variant="h6"
@@ -53,6 +65,7 @@ export default function Nav() {
                   Subscription
                 </Typography>
               </Link>
+            )}
               </Box>
             {/* </Grid> */}
             </Box>
@@ -64,7 +77,7 @@ export default function Nav() {
           </Container>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display:"flex"}}>
-            {isLogin && (
+            {user.isLogin && (
               <Link
                 href="/user"
                 sx={{ color: "#ffff", textDecoration: "none" }}
@@ -72,7 +85,7 @@ export default function Nav() {
                 <AccountCircle />
               </Link>
             )}
-            {!isLogin && (
+            {!user.isLogin && (
               <Link
                 variant="h6"
                 // noWrap
