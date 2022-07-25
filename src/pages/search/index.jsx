@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
 import Filter from "../../components/sidebar/filter";
 import ListCard from "../../components/card/listCard";
-import useGetMovieByTitle from "../../hooks/useGetMovieByTitle";
+import useGetMovieByCond from "../../hooks/useGetMovieByCond";
 import { Box } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function Search() {
-  const { title } = useParams();
-  console.log(title);
-  const { MovieByTitle } =
-    useGetMovieByTitle("%" + title + "%");
+  const [searchParams] = useSearchParams();
+  const title = searchParams.get("title")
+  const genre = searchParams.get("genre")
+  let order = searchParams.get("order")
+  console.log(order)
+  if (order === null) {
+    order = "desc"
+  }
+  // console.log(title);
+  const { MovieByCond, errorMovieByCond} =
+  useGetMovieByCond(title,genre,order);
   const [movie, setMovie] = useState([]);
-
+console.log(errorMovieByCond)
   useEffect(() => {
-    if (MovieByTitle) {
-      console.log(MovieByTitle);
-      setMovie(MovieByTitle.moviedb_movie);
+    if (MovieByCond) {
+      console.log(MovieByCond);
+      setMovie(MovieByCond.moviedb_movie);
     }
-  }, [MovieByTitle]);
+  }, [MovieByCond]);
 
   // if (errorMovieByTitle){
   //   return 

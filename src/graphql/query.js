@@ -136,9 +136,9 @@ query GetMovieByOrderDesc {
   }
   `;
 
-  export const GetMovieByTitle = gql`
-  query GetMovieByTitle($_like: String = "") {
-    moviedb_movie(where: {Title: {_ilike: $_like}}) {
+  export const GetMovieByCond = gql`
+  query GetMovieByCond($where: moviedb_movie_bool_exp! = {} $order: moviedb_movie_order_by!= {}) {
+    moviedb_movie(where: $where,order_by: [$order]) {
       updated_at
       imdbID
       id

@@ -9,28 +9,31 @@ import {
 } from "@mui/material";
 // import FormControlLabel from "@mui/material/FormControlLabel";
 import { Link } from "@mui/material";
-// import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom";
+import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom";
 import { useGetAllGenre } from "../../hooks/useGetAllGenre";
 
 export default function BasicTextFields() {
-//     const [searchParams, setSearchParams] = useSearchParams();
-//   const navigate = useNavigate();
-//   const ClickHandler = (e) => {
-//       console.log("masuk" + e.target.name + e.target.value)
-//     if (e.target.name === "order") {
-//         console.log("masuk order")
-//       navigate({
-//         pathname: "/search",
-//         order: `?${createSearchParams(e.target.value)}`,
-//       });
-//     } else {
-//         console.log("masuk genre")
-//       navigate({
-//         pathname: "/search",
-//         genre: `?${createSearchParams(e.target.value)}`,
-//       });
-//     }
-//   };
+  const [searchParams] = useSearchParams();
+  const [order, setOrder] = useState("");
+  const [genre, setGenre] = useState("");
+  let params = {
+    title: searchParams.get("title"),
+    order: order,
+    genre: genre,
+  };
+  const navigate = useNavigate();
+  const ClickHandler = (e) => {
+      console.log("masuk" + e.target.name + e.target.value)
+    if (e.target.name === "order") {
+      setOrder(e.target.value)
+    } else {
+      setGenre(e.target.value)
+    }
+    navigate({
+    pathname: "/search",
+    search: `?${createSearchParams(params)}`,
+    });
+  };
   const [genreDB, setGenreDB] = useState([]);
 
   const { allGenre, errorAllGenre, loadingAllGenre } = useGetAllGenre();
@@ -68,7 +71,6 @@ export default function BasicTextFields() {
         <Typography gutterBottom variant="h6" component="div" color="white">
           Order
         </Typography>
-        <Link href={`/order/asc`}>
         <Typography
           gutterBottom
           variant="subtitle1"
@@ -76,13 +78,11 @@ export default function BasicTextFields() {
           sx={{background:"none", border:"none",}}
           color="white"
           name="order"
-          value="oldest"
-        //   onClick={ClickHandler}
+          value="desc"
+          onClick={ClickHandler}
         >
           Oldest 
         </Typography>
-        </Link>
-        <Link href={`/order/desc`}>
         <Typography
           gutterBottom
           variant="subtitle1"
@@ -90,12 +90,11 @@ export default function BasicTextFields() {
           sx={{background:"none", border:"none",}}
           color="white"
           name="order"
-          value="newest"
-        //   onClick={ClickHandler}
+          value="asc"
+          onClick={ClickHandler}
         >
           Newest
         </Typography>
-        </Link>
       </Box>
       <Box
         sx={{ width: "100%", display: "flex", flexDirection: "column", pt: 2 }}
@@ -104,7 +103,6 @@ export default function BasicTextFields() {
           Genre
         </Typography>
         {genreDB.map((genre) => (
-            <Link href={`/filter/${genre.id}`}>
           <Typography
             key={genre.id}
             gutterBottom
@@ -113,12 +111,11 @@ export default function BasicTextFields() {
             sx={{background:"none", border:"none",}}
             color="white"
             name="genre"
-            value={genre.name}
-            // onClick={ClickHandler}
+            value={genre.id}
+            onClick={ClickHandler}
           >
             {genre.name}
           </Typography>
-          </Link>
         ))}
       </Box>
     </Container>

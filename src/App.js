@@ -143,9 +143,9 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/search/:title" element={<Search load={setLoading}/>} />
-              <Route path="/filter/:id" element={<Filter load={setLoading}/>} />
-              <Route path="/order/:id" element={<Order load={setLoading}/>} />
+              <Route path="/search" element={<Search load={setLoading}/>} />
+              {/* <Route path="/filter/:id" element={<Filter load={setLoading}/>} />
+              <Route path="/order/:id" element={<Order load={setLoading}/>} /> */}
               <Route path="/user" element={<PrivateRoute />}>
                 <Route index element={<User />} />
               </Route>
