@@ -13,7 +13,6 @@ import {
 import LoadingButton from "@mui/lab/LoadingButton";
 // import Line from "../../assets/Line 13.png";
 import { makeStyles } from "@mui/styles";
-import axios from "axios";
 import { useCreateGenre } from "../../hooks/useCreateGenre";
 import { useGetAllGenre } from "../../hooks/useGetAllGenre";
 
@@ -37,7 +36,6 @@ export default function BasicTextFields(props) {
   const [genre, setGenre] = useState("");
   const [genreDB, setGenreDB] = useState([]);
 
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [AddGenre, setAddGenre] = useState(false);
   const { CreateGenre, loadingCreateGenre } = useCreateGenre();
@@ -81,43 +79,6 @@ export default function BasicTextFields(props) {
     setGenre("");
   };
 
-  function getData() {
-    console.log("masuk");
-    setIsLoading(true);
-    async function getData() {
-      try {
-        const data = await axios.get(
-          `http://www.omdbapi.com/?apikey=8b8a25e8&i=${movie.imdbID}`
-        );
-        if (!data) {
-          console.log(data);
-          setIsLoading(false);
-          setError("Result not found...");
-        } else {
-          console.log(data.data);
-          const moviedb = data.data;
-          props.setMovie({
-            Title: moviedb.Title,
-            Released: moviedb.Released,
-            Writer: moviedb.Writer,
-            Plot: moviedb.Plot,
-            Poster: moviedb.Poster,
-            imdbID: moviedb.imdbID,
-            // Genre: moviedb.Genre,
-            Runtime: moviedb.Runtime,
-            // Video: moviedb.,
-          });
-          console.log("masuk else");
-
-          setIsLoading(false);
-        }
-      } catch (err) {
-        setError("Something went wrong...");
-        setIsLoading(false);
-      }
-    }
-    getData();
-  }
   return (
     <Container className={styles.container} sx={{ marginTop: 5 }}>
       <Box sx={{ borderBottom: " 1px solid #ABABB1" }}>
@@ -132,24 +93,6 @@ export default function BasicTextFields(props) {
           </Typography>
         )}
       </Box>
-      {error && (
-        <>
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Typography gutterBottom variant="h3" component="div" color="white">
-              {error}
-            </Typography>
-          </Box>
-        </>
-      )}
-      {!error && (
       <FormControl
         component="form"
         sx={{
@@ -184,9 +127,6 @@ export default function BasicTextFields(props) {
             variant="outlined"
             color="outline"
           />
-          <Button onClick={getData} variant="contained">
-            Get
-          </Button>
           {/* </Grid> */}
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 5, padding: 2 }}>
@@ -441,7 +381,6 @@ export default function BasicTextFields(props) {
           </Box>
         )}
       </FormControl>
-      )}
     </Container>
   );
 }

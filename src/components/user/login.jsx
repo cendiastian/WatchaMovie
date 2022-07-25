@@ -46,6 +46,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.user.isLogin);
+  const role = useSelector((state) => state.user.role);
   const dispatch = useDispatch();
   const { getUserById, userById } = useGetUser();
   // const { id, name, role, premium, expired } = userById.moviedb_user;
@@ -92,9 +93,11 @@ export default function Login() {
   }, [dispatch, userById]);
 
   if (isLogin) {
-    console.log("masuk");
-    console.log(isLogin);
-    navigate("/");
+    if (role === 'admin'){
+      navigate("/admin");
+    } else{
+      navigate("/");
+    }
   }
   const loginHandler = (e) => {
     e.preventDefault();
