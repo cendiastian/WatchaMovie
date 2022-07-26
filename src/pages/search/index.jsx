@@ -3,11 +3,11 @@ import Filter from "../../components/sidebar/filter";
 import ListCard from "../../components/card/listCard";
 import useGetMovieByCond from "../../hooks/useGetMovieByCond";
 import { Box } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams,useParams } from "react-router-dom";
 
 export default function Search() {
   const [searchParams] = useSearchParams();
-  const title = searchParams.get("title")
+  const { title } = useParams();
   const genre = searchParams.get("genre")
   let order = searchParams.get("order")
   console.log(order)
@@ -33,7 +33,7 @@ console.log(errorMovieByCond)
   return (
     <>
       <Box sx={{ display: "flex", width: "95%", alignContent: "flex-start" }}>
-        <Filter />
+        <Filter title={title}/>
         <ListCard length={10} movie={movie} />
       </Box>
     </>

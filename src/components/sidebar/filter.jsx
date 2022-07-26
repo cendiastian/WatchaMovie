@@ -9,15 +9,13 @@ import {
 } from "@mui/material";
 // import FormControlLabel from "@mui/material/FormControlLabel";
 import { Link } from "@mui/material";
-import { useNavigate, createSearchParams, useSearchParams } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import { useGetAllGenre } from "../../hooks/useGetAllGenre";
 
-export default function BasicTextFields() {
-  const [searchParams] = useSearchParams();
+export default function BasicTextFields(props) {
   const [order, setOrder] = useState("");
   const [genre, setGenre] = useState("");
   let params = {
-    title: searchParams.get("title"),
     order: order,
     genre: genre,
   };
@@ -30,7 +28,7 @@ export default function BasicTextFields() {
       setGenre(e.target.value)
     }
     navigate({
-    pathname: "/search",
+    pathname: `/search/${props.title}`,
     search: `?${createSearchParams(params)}`,
     });
   };
