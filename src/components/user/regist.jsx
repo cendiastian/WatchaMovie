@@ -137,7 +137,7 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           label="Password"
-          //   type="password"
+          type="password"
           id="password"
           autoComplete="current-password"
           color="outline"

@@ -153,7 +153,9 @@ function App() {
                 <Route index element={<Movie load={setLoading}/>} />
               </Route>
               <Route path="/admin" element={<AdminRoute />}>
-                <Route index element={<Admin load={setLoading}/>} />
+                <Route path="" element={<PrivateRoute />}>
+                  <Route index element={<Admin load={setLoading}/>} />
+                </Route>                
               </Route>
             </Routes>
           )}

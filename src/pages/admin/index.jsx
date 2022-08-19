@@ -20,6 +20,8 @@ const movieData = {
 
 export default function Admin() {
   const { allMovie, loadingAllMovie } = useGetAllMovie();
+  const [message, setMessage] = useState("");
+  const [valid, setValid] = useState(true);
   const [update, setUpdate] = useState(false);
   const [AllMovie, setAllMovie] = useState([]);
   const [movie, setMovie] = useState(movieData);
@@ -27,15 +29,45 @@ export default function Admin() {
   const { CreateMovie  } = useCreateMovie();
 
   const { updateMovie, loadingUpdate } = useUpdateMovie();
-
+  function validURL(str) {
+    const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?');
+    return !!regex.test(str);
+  }
   const CreateMovieHandler = () => {
-    console.log("Create Movie");
-    CreateMovie({
-      variables: {
-        object: movie,
-      },
-    });
-    setMovie(movieData);
+    if (movie.Title === "" || movie.Video === ""){
+      setMessage("Please input required data")
+      setValid(false)
+    } else if (movie.Poster) {
+      if (!validURL(movie.Poster) && !validURL(movie.Video)){
+          setMessage("Video and Poster Value is not Link")
+          setValid(false)
+      } else if (!validURL(movie.Poster)){
+        setMessage("Poster Value is not Link")
+        setValid(false)
+      } else if (!validURL(movie.Video)) {
+        setMessage("Video Value is not Link")
+        setValid(false)
+      } else {
+        CreateMovie({
+          variables: {
+            object: movie,
+          },
+        });
+        setMovie(movieData);
+      }
+    } else{
+      if (!validURL(movie.Video)) {
+        setMessage("Video Value is not Link")
+        setValid(false)
+      } else {
+        CreateMovie({
+          variables: {
+            object: movie,
+          },
+        });
+        setMovie(movieData);
+      }
+    }
   };
   useEffect(() => {
     if (allMovie) {
@@ -94,7 +126,8 @@ export default function Admin() {
           <Form
             CreateMovie={CreateMovieHandler}
             UpdateMovie={updateHandler}
-            // allGenre={genreDB}
+            message={message}
+            valid={valid}
             movie={movie}
             setMovie={setMovie}
             update={update}

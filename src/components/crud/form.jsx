@@ -9,6 +9,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Alert,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 // import Line from "../../assets/Line 13.png";
@@ -32,7 +33,6 @@ const useStyles = makeStyles({
 export default function BasicTextFields(props) {
   const movie = props.movie;
   const styles = useStyles();
-  //   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("");
   const [genreDB, setGenreDB] = useState([]);
 
@@ -121,7 +121,7 @@ export default function BasicTextFields(props) {
             sx={{ width: "50%" }}
             name="imdbID"
             id="outlined-basic"
-            label="Outlined"
+            
             value={movie.imdbID}
             onChange={onChange}
             variant="outlined"
@@ -141,8 +141,9 @@ export default function BasicTextFields(props) {
           <TextField
             sx={{ width: "50%" }}
             name="Title"
-            id="outlined-basic"
-            label="Outlined"
+            id="outlined-required"
+            required
+            label="Required"
             value={movie.Title}
             onChange={onChange}
             variant="outlined"
@@ -201,7 +202,7 @@ export default function BasicTextFields(props) {
               sx={{ width: "50%" }}
               name="newgenre"
               id="outlined-basic"
-              label="Outlined"
+              
               value={genre}
               onChange={onChange}
               variant="outlined"
@@ -232,7 +233,7 @@ export default function BasicTextFields(props) {
             sx={{ width: "50%" }}
             name="Released"
             id="outlined-basic"
-            label="Outlined"
+            
             value={movie.Released}
             onChange={onChange}
             variant="outlined"
@@ -253,7 +254,7 @@ export default function BasicTextFields(props) {
             sx={{ width: "50%" }}
             name="Writer"
             id="outlined-basic"
-            label="Outlined"
+            
             value={movie.Writer}
             onChange={onChange}
             variant="outlined"
@@ -273,7 +274,7 @@ export default function BasicTextFields(props) {
             sx={{ width: "50%" }}
             name="Plot"
             id="outlined-basic"
-            label="Outlined"
+            
             value={movie.Plot}
             onChange={onChange}
             variant="outlined"
@@ -293,7 +294,7 @@ export default function BasicTextFields(props) {
             sx={{ width: "50%" }}
             name="Runtime"
             id="outlined-basic"
-            label="Outlined"
+            
             value={movie.Runtime}
             onChange={onChange}
             variant="outlined"
@@ -312,8 +313,9 @@ export default function BasicTextFields(props) {
           <TextField
             sx={{ width: "50%" }}
             name="Poster"
+            type="url"
             id="outlined-basic"
-            label="Outlined"
+            
             value={movie.Poster}
             onChange={onChange}
             variant="outlined"
@@ -332,18 +334,22 @@ export default function BasicTextFields(props) {
           <TextField
             sx={{ width: "50%" }}
             name="Video"
-            id="outlined-basic"
-            label="Outlined"
+            type="url"
+            id="outlined-required"
+            required
+            label="Required"
+            
             value={movie.Video}
             onChange={onChange}
             variant="outlined"
             color="outline"
           />
         </Box>
-        {!props.update && (
           <Box
-            sx={{ display: "flex", justifyContent: "flex-start", padding: 1 }}
+            sx={{ display: "flex", justifyContent: "flex-start", gap: 5, padding: 1 }}
           >
+        {!props.update && (<>
+
             {isLoading && (
               <LoadingButton variant="contained" sx={{ width: "20%" }}>
                 Create
@@ -358,12 +364,10 @@ export default function BasicTextFields(props) {
                 Create
               </Button>
             )}
-          </Box>
+        </>
         )}
         {props.update && (
-          <Box
-            sx={{ display: "flex", justifyContent: "flex-start", padding: 1 }}
-          >
+          <>
             {isLoading && (
               <LoadingButton variant="contained" sx={{ width: "20%" }}>
                 Update
@@ -378,8 +382,13 @@ export default function BasicTextFields(props) {
                 Update
               </Button>
             )}
-          </Box>
+          </>
         )}
+            {!props.valid && (
+              <Alert variant="standard" severity="error">
+            {props.message}
+          </Alert>)}
+          </Box>
       </FormControl>
     </Container>
   );
