@@ -2,7 +2,7 @@ import { InsertNewUser } from "../graphql/mutation";
 import { useMutation } from "@apollo/client";
 
 export function useInsertNewUser() {
-  const [insertUser, { error: errorInsertUser, loading: loadingInsertUser }] =
+  const [insertUser, { data: newUser,error: errorInsertUser, loading: loadingInsertUser }] =
     useMutation(InsertNewUser);
-  return { insertUser, errorInsertUser, loadingInsertUser };
+  return { insertUser,newUser, errorInsertUser, loadingInsertUser };
 }
