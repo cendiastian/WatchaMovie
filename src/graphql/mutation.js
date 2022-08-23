@@ -17,7 +17,13 @@ export const createGenre = gql`
 export const InsertNewUser = gql`
   mutation MyMutation($object: moviedb_user_insert_input!) {
     insert_moviedb_user_one(object: $object) {
+      email
+      expired
       id
+      name
+      password
+      premium
+      role
     }
   }
 `;

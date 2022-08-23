@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { makeStyles } from "@mui/styles";
@@ -39,7 +39,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errorAuth, setErrorAuth] = useState(false);
   const [loadingAuth, setLoadingAuth] = useState(false);
-  const { insertUser, errorInsertUser, loadingInsertUser } = useInsertNewUser();
+  const { insertUser,newUser, errorInsertUser, loadingInsertUser } = useInsertNewUser();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.persistedReducer.user.isLogin);
@@ -68,13 +68,16 @@ export default function Login() {
               },
             },
           });
-          dispatch(
-            login({
-              name: auth.currentUser.displayName,
-              id: auth.currentUser.uid,
-            })
-          );
-          setLoadingAuth(false);
+          // dispatch(
+          //   login({
+          //     name: auth.currentUser.displayName,
+          //     id: auth.currentUser.uid,
+          //     role: newUser.role,
+          //     premium: newUser.premium,
+          //     expired: newUser.expired,
+          //   })
+          // );
+          // setLoadingAuth(false);
 
         });
       })
@@ -83,6 +86,21 @@ export default function Login() {
         setErrorAuth(err);
       });
   };
+  useEffect(() => {
+    if (newUser?.insert_moviedb_user_one){
+      const user = newUser.insert_moviedb_user_one
+      dispatch(
+        login({
+          name: user.name,
+          id: user.id, 
+          role: user.role,
+          premium: user.premium,
+          expired: user.expired,
+        })
+      );
+      setLoadingAuth(false);
+    }
+    }, [insertUser, newUser]);
 
   const isLoading = loadingAuth || loadingInsertUser;
   const isError = errorAuth || errorInsertUser;

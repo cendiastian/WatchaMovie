@@ -27,7 +27,7 @@ export default function Video(props) {
           // color="white"
           textAlign="left"
         >
-          Movie Title
+          Movie Details
         </Typography>
       </Box>
       <Grid container spacing={1} justifyContent={"flex-start"} sx={{ gap: 2 }}>
