@@ -8,9 +8,9 @@ import moment from 'moment'
 import { useUpdateUser } from "../../hooks/useUpdateUser";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import {  useNavigate  } from "react-router-dom";
-
+import { login } from "../../store/userSlice";
 
 const tiers = [
   {
@@ -44,10 +44,12 @@ export default function Home() {
   const [searchParams] = useSearchParams();
   const [succes, setSucces] = useState(false);
   const [message, setMessage] = useState("");
-  const id = useSelector((state) => state.persistedReducer.user.id);
+  const user = useSelector((state) => state.persistedReducer.user);
+  // const id = user.id;
   const navigate = useNavigate();
   const order_id = searchParams.get("order_id")
-  const { updateUser } = useUpdateUser();
+  const { updateUser, loadingUpdate } = useUpdateUser();
+  const dispatch = useDispatch();
   const handeleClose = () => {
     setSucces(false);
     navigate('/');
@@ -56,7 +58,7 @@ export default function Home() {
     if (order_id){ 
       axios
       .get(
-        `https://watchamovie-payment.herokuapp.com/invoice?id=${order_id}&user_id=${id}`,
+        `https://watchamovie-payment.herokuapp.com/invoice?id=${order_id}&user_id=${user.id}`,
         {
           headers: {
             accept: "*/*",
@@ -67,11 +69,20 @@ export default function Home() {
       .then(function (response) {
         updateUser({
           variables: {
-            id: id,
+            id: user.id,
             premium: true,
             expired: moment().add(response.data.data.Expired, 'd'),
           },
         });
+        dispatch(
+          login({
+            name: user.name,
+            id: user.id,
+            role: user.role,
+            premium: true,
+            expired: moment().add(response.data.data.Expired, 'd'),
+          })
+        );
         setMessage("You are Premium now");
         setSucces(true);
       })
