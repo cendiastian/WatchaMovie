@@ -26,7 +26,7 @@ export default function Video(props) {
           color="white"
           textAlign="left"
         >
-          Movie Title
+          {props.title}
         </Typography>
       </Box>
       {/* <div item xs={1} sm={1}>

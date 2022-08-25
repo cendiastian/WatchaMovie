@@ -50,7 +50,7 @@ export default function Movie() {
       }
       {!isLoading && (
         <Box sx={{display: 'flex', flexDirection:'column', gap:'5vh'}}>
-          <Video video={movie.Video} />
+          <Video video={movie.Video} title={movie.Title}/>
           <Detail movie={movie} />
           <ListCard length={8} movie={movieByLimit}/>
         </Box>
